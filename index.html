@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Polední menu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #FF4136;
+    --yellow: #FFD700;
+    --pink: #FF1493;
+    --cream: #FFF8E7;
+    --blue: #0057E7;
+    --black: #0a0a0a;
+  }
+
+  * , *::before, *::after { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    background-color: #f2ede0;
+    color: var(--black);
+    padding: 20px 14px 60px;
+  }
+
+  .dotted-bg {
+    background-image: radial-gradient(circle, rgba(0,0,0,0.35) 1.6px, transparent 1.8px);
+    background-size: 16px 16px;
+  }
+
+  .bg-red { background-color: var(--red); }
+  .bg-yellow { background-color: var(--yellow); }
+  .bg-pink { background-color: var(--pink); }
+
+  .display-font {
+    font-family: 'Anton', 'Inter', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* --- Hlavička stránky --- */
+
+  .poster-header {
+    position: relative;
+    max-width: 1100px;
+    margin: 0 auto 32px;
+    border: 4px solid var(--black);
+    border-radius: 18px;
+    padding: 30px 20px 34px;
+    text-align: center;
+    box-shadow: 8px 8px 0 var(--black);
+    overflow: visible;
+  }
+
+  .top-tag {
+    display: inline-block;
+    background: var(--blue);
+    color: #fff;
+    border: 3px solid var(--black);
+    border-radius: 8px;
+    padding: 6px 16px;
+    font-size: 0.85rem;
+    letter-spacing: 1.5px;
+    transform: rotate(-2deg);
+    box-shadow: 3px 3px 0 var(--black);
+  }
+
+  .poster-header h1 {
+    margin: 18px 0 0;
+    color: #fff;
+    font-size: clamp(2rem, 7vw, 3.6rem);
+    text-shadow: 3px 3px 0 var(--black);
+    line-height: 1.05;
+  }
+
+  .date-badge {
+    display: inline-block;
+    margin-top: 18px;
+    background: var(--yellow);
+    color: var(--black);
+    border: 3px solid var(--black);
+    border-radius: 10px;
+    padding: 8px 22px;
+    font-size: 1.1rem;
+    transform: rotate(2deg);
+    box-shadow: 3px 3px 0 var(--black);
+  }
+
+  .burst-badge {
+    position: absolute;
+    top: -22px;
+    right: -14px;
+    width: 92px;
+    height: 92px;
+    background: var(--pink);
+    color: #fff;
+    border: 3px solid var(--black);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 0.95rem;
+    line-height: 1.1;
+    transform: rotate(-10deg);
+    clip-path: polygon(
+      50% 0%, 61% 18%, 79% 6%, 78% 27%, 98% 25%, 87% 43%,
+      100% 50%, 87% 57%, 98% 75%, 78% 73%, 79% 94%, 61% 82%,
+      50% 100%, 39% 82%, 21% 94%, 22% 73%, 2% 75%, 13% 57%,
+      0% 50%, 13% 43%, 2% 25%, 22% 27%, 21% 6%, 39% 18%
+    );
+  }
+
+  @media (max-width: 480px) {
+    .burst-badge { width: 74px; height: 74px; font-size: 0.8rem; top: -16px; right: -10px; }
+  }
+
+  /* --- Mřížka karet --- */
+
+  .karty {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 26px;
+    align-items: start;
+  }
+
+  .card {
+    border: 4px solid var(--black);
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--cream);
+    box-shadow: 7px 7px 0 var(--black);
+  }
+
+  /* --- Horní část karty --- */
+
+  .card-top {
+    position: relative;
+    padding: 22px 16px 26px;
+    color: #fff;
+  }
+
+  .bg-yellow.card-top { color: var(--black); }
+
+  .speech-bubble {
+    position: relative;
+    display: inline-block;
+    background: #fff;
+    color: var(--black);
+    border: 3px solid var(--black);
+    border-radius: 14px;
+    padding: 9px 18px;
+    font-size: 1.2rem;
+    box-shadow: 3px 3px 0 var(--black);
+    transform: rotate(-1.5deg);
+  }
+
+  .card:nth-child(even) .speech-bubble { transform: rotate(1.5deg); }
+
+  .speech-bubble::after {
+    content: "";
+    position: absolute;
+    left: 26px;
+    bottom: -15px;
+    width: 0;
+    height: 0;
+    border-left: 11px solid transparent;
+    border-right: 11px solid transparent;
+    border-top: 15px solid var(--black);
+  }
+
+  .speech-bubble::before {
+    content: "";
+    position: absolute;
+    left: 29px;
+    bottom: -9px;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 10px solid #fff;
+    z-index: 1;
+  }
+
+  .card-top-meta {
+    margin-top: 18px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .hours-badge {
+    background: var(--yellow);
+    color: var(--black);
+    border: 3px solid var(--black);
+    border-radius: 8px;
+    padding: 4px 12px;
+    font-size: 0.85rem;
+    transform: rotate(-2deg);
+    box-shadow: 2px 2px 0 var(--black);
+    white-space: nowrap;
+  }
+
+  .address-text {
+    font-size: 0.85rem;
+    font-weight: 600;
+    opacity: 0.95;
+  }
+
+  /* --- Pruh s polévkou --- */
+
+  .soup-strip {
+    background: var(--yellow);
+    border-bottom: 3px dashed var(--black);
+    padding: 12px 16px;
+    font-size: 0.98rem;
+  }
+
+  .soup-strip .soup-label {
+    font-family: 'Anton', 'Inter', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-right: 6px;
+  }
+
+  /* --- Seznam jídel --- */
+
+  .food-list {
+    background: var(--cream);
+    padding: 6px 0;
+  }
+
+  .food-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border-bottom: 1px dashed rgba(0,0,0,0.25);
+  }
+
+  .food-item:last-child { border-bottom: none; }
+
+  .food-number {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--pink);
+    color: #fff;
+    border: 2.5px solid var(--black);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Anton', 'Inter', sans-serif;
+    font-size: 0.9rem;
+  }
+
+  .food-name {
+    flex: 1 1 auto;
+    font-size: 0.96rem;
+    line-height: 1.35;
+  }
+
+  .food-note {
+    display: inline-block;
+    background: var(--black);
+    color: #fff;
+    font-size: 0.68rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    border-radius: 5px;
+    padding: 2px 6px;
+    margin-right: 6px;
+    vertical-align: middle;
+    transform: rotate(-2deg);
+  }
+
+  .food-price {
+    flex-shrink: 0;
+    background: var(--yellow);
+    color: var(--black);
+    border: 2.5px solid var(--black);
+    border-radius: 8px;
+    padding: 3px 10px;
+    font-weight: 700;
+    font-size: 0.88rem;
+    white-space: nowrap;
+    margin-left: auto;
+  }
+
+  /* --- Obrázek menu --- */
+
+  .image-body {
+    background: #fff;
+    padding: 16px;
+    text-align: center;
+  }
+
+  .image-body img {
+    max-width: 100%;
+    border: 3px solid var(--black);
+    border-radius: 8px;
+    display: block;
+    margin: 0 auto;
+  }
+
+  /* --- Nedostupné menu --- */
+
+  .unavailable-body {
+    background: #d9d9d9;
+    padding: 44px 20px;
+    text-align: center;
+  }
+
+  .unavailable-text {
+    display: inline-block;
+    font-family: 'Anton', 'Inter', sans-serif;
+    text-transform: uppercase;
+    font-size: 1.3rem;
+    color: #888;
+    text-decoration: line-through;
+    letter-spacing: 0.5px;
+  }
+
+  .stav {
+    max-width: 1100px;
+    margin: 0 auto 20px;
+    text-align: center;
+    font-weight: 600;
+  }
+</style>
+</head>
+<body>
+
+  <header class="poster-header bg-red dotted-bg">
+    <div class="burst-badge display-font">JÍST!</div>
+    <span class="top-tag display-font">POLEDNÍ MENU · BRNO</span>
+    <h1 class="display-font" id="hlavni-nadpis">MENU</h1>
+    <div class="date-badge display-font" id="datum-badge"></div>
+  </header>
+
+  <p class="stav" id="stav">Načítám menu…</p>
+
+  <main class="karty" id="karty"></main>
+
+<script>
+  const BARVY = ['bg-red', 'bg-yellow', 'bg-pink'];
+  const DNY = ['Neděle', 'Pondělí', 'Úterý', 'Středa', 'Čtvrtek', 'Pátek', 'Sobota'];
+
+  function dnesniDatum() {
+    const d = new Date();
+    return `${d.getDate()}. ${d.getMonth() + 1}. ${d.getFullYear()}`;
+  }
+
+  function formatujCenu(cena) {
+    if (!/\d/.test(cena)) return cena;
+    const cislice = cena.replace(/\D/g, '');
+    return `${cislice} Kč`;
+  }
+
+  function rozpoznejPoznamku(nazev) {
+    const m = nazev.match(/^\s*(bezlepkov[ée])[-\s]*/i);
+    if (!m) return { poznamka: null, nazev };
+    return { poznamka: 'BEZ LEPKU', nazev: nazev.slice(m[0].length) };
+  }
+
+  function vytvorPolozkuHtml(polozka) {
+    const { poznamka, nazev } = rozpoznejPoznamku(polozka.nazev);
+    return `
+      <div class="food-item">
+        <span class="food-number display-font">${polozka.cislo}</span>
+        <span class="food-name">${poznamka ? `<span class="food-note">${poznamka}</span>` : ''}${nazev}</span>
+        <span class="food-price">${formatujCenu(polozka.cena)}</span>
+      </div>`;
+  }
+
+  function vytvorObsahKarty(restaurace) {
+    if (restaurace.typ === 'obrazek') {
+      return `
+        <div class="image-body">
+          <img src="${restaurace.obrazek_url}" alt="Menu – ${restaurace.restaurace}">
+        </div>`;
+    }
+
+    if (restaurace.dostupne === false) {
+      return `
+        <div class="unavailable-body">
+          <span class="unavailable-text">${restaurace.duvod || 'Menu není dostupné'}</span>
+        </div>`;
+    }
+
+    const polozky = restaurace.polozky || [];
+    const maPolevku = polozky.length > 0 && polozky[0].cena === 'v ceně';
+    const polevka = maPolevku ? polozky[0] : null;
+    const hlavni = (maPolevku ? polozky.slice(1) : polozky).map((p, i) => ({ ...p, cislo: i + 1 }));
+
+    const soupHtml = polevka ? `
+      <div class="soup-strip">
+        <span class="soup-label">Polévka</span><span>${polevka.nazev}</span>
+      </div>` : '';
+
+    const seznamHtml = hlavni.length
+      ? `<div class="food-list">${hlavni.map(vytvorPolozkuHtml).join('')}</div>`
+      : '';
+
+    return soupHtml + seznamHtml;
+  }
+
+  function vytvorKartu(restaurace, index) {
+    const barva = BARVY[index % BARVY.length];
+    const meta = [];
+    if (restaurace.oteviraci_doba) {
+      meta.push(`<span class="hours-badge">${restaurace.oteviraci_doba}</span>`);
+    }
+    if (restaurace.adresa) {
+      meta.push(`<span class="address-text">${restaurace.adresa}</span>`);
+    }
+
+    return `
+      <article class="card">
+        <div class="card-top ${barva} dotted-bg">
+          <div class="speech-bubble display-font">${restaurace.restaurace}</div>
+          ${meta.length ? `<div class="card-top-meta">${meta.join('')}</div>` : ''}
+        </div>
+        ${vytvorObsahKarty(restaurace)}
+      </article>`;
+  }
+
+  async function nacistMenu() {
+    const nadpis = document.getElementById('hlavni-nadpis');
+    const datumBadge = document.getElementById('datum-badge');
+    const stav = document.getElementById('stav');
+    const karty = document.getElementById('karty');
+
+    const dnesniDen = DNY[new Date().getDay()];
+    nadpis.textContent = `MENU NA ${dnesniDen.toUpperCase()}`;
+    datumBadge.textContent = dnesniDatum();
+
+    try {
+      const odpoved = await fetch('menu.json');
+      if (!odpoved.ok) throw new Error(`HTTP ${odpoved.status}`);
+      const data = await odpoved.json();
+
+      stav.remove();
+      karty.innerHTML = data.map(vytvorKartu).join('');
+    } catch (e) {
+      stav.textContent = 'Menu se nepodařilo načíst.';
+    }
+  }
+
+  nacistMenu();
+</script>
+</body>
+</html>
