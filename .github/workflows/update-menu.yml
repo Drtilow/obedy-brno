@@ -1,0 +1,45 @@
+name: Aktualizace menu
+
+on:
+  schedule:
+    # 07:00 UTC = 9:00 letního času (CEST). V zimním čase (CET) to vyjde na 8:00 místního.
+    - cron: '0 7 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-menu:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repozitáře
+        uses: actions/checkout@v4
+
+      - name: Nastavit Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Nainstalovat Tesseract OCR
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y tesseract-ocr tesseract-ocr-ces
+
+      - name: Nainstalovat Python závislosti
+        run: pip install -r requirements.txt
+
+      - name: Spustit scraper
+        run: python scrape_menu.py
+
+      - name: Commitnout a pushnout menu.json (jen při změně)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add menu.json
+          if git diff --cached --quiet; then
+            echo "menu.json se nezměnil, commit se přeskakuje."
+          else
+            git commit -m "Aktualizace menu.json ($(date -u +%Y-%m-%d))"
+            git push
+          fi
