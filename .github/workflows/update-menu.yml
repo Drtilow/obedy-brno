@@ -41,5 +41,9 @@ jobs:
             echo "menu.json se nezměnil, commit se přeskakuje."
           else
             git commit -m "Aktualizace menu.json ($(date -u +%Y-%m-%d))"
+            if ! git pull --rebase origin main; then
+              echo "::error::git pull --rebase selhal, nejspíš kvůli konfliktu s mezitímní změnou na GitHubu. Commit s aktualizací menu.json zůstal jen lokálně v tomto běhu a nebyl napushnutý - je potřeba ruční zásah (podívat se, co se v repozitáři mezitím změnilo, a konflikt vyřešit)."
+              exit 1
+            fi
             git push
           fi
