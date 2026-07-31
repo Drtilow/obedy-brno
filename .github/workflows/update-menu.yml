@@ -2,8 +2,9 @@ name: Aktualizace menu
 
 on:
   schedule:
-    # 07:00 UTC = 9:00 letního času (CEST). V zimním čase (CET) to vyjde na 8:00 místního.
-    - cron: '0 7 * * *'
+    # 05:00 UTC = 7:00 letního času (CEST). Spouštíme dřív kvůli občasnému zpoždění 
+   # GitHub Actions scheduled běhů (běžně 2-3 hodiny).
+  - cron: '0 5 * * *'
   workflow_dispatch:
 
 permissions:
