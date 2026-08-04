@@ -119,6 +119,36 @@
     ]
   },
   {
+    "restaurace": "Fresh Menu (Šumavská/Veveří)",
+    "dostupne": true,
+    "polozky": [
+      {
+        "nazev": "Jarní zeleninová (3,9)",
+        "cena": "v ceně"
+      },
+      {
+        "nazev": "350g Cizrna na paprice s chilli, dušená rýže (7) BL",
+        "cena": "139 Kč"
+      },
+      {
+        "nazev": "120g Maďarský vepřový guláš, houskové knedlíky (1,3,7)",
+        "cena": "139 Kč"
+      },
+      {
+        "nazev": "150g Kuřecí roláda se sušenými rajčaty, vařené brambory (1)",
+        "cena": "149 Kč"
+      },
+      {
+        "nazev": "120g Chilli con carne s hovězím masem, dušená rýže (1)",
+        "cena": "149 Kč"
+      },
+      {
+        "nazev": "300g Salát CAESAR s grilovaným kuřecím prsíčkem, krutony, parmazán (1,3,4,7,10)",
+        "cena": "149 Kč"
+      }
+    ]
+  },
+  {
     "restaurace": "U Dřeváka Beer&Grill",
     "dostupne": true,
     "polozky": [

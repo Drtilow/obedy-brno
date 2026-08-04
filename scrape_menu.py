@@ -364,6 +364,101 @@ def scrape_u_nemilosrdnych_bratri():
     return {"restaurace": nazev, "dostupne": True, "polozky": polozky}
 
 
+FRESH_POLEVKA_REGEX = re.compile(r"^Pol[eé]vka\s*:\s*(.+)$", re.IGNORECASE)
+FRESH_POLOZKA_REGEX = re.compile(r"^\s*[1-5][.)]\s*(.+)$")
+FRESH_CENA_REGEX = re.compile(r"(\d+)\s*K[cč]\s*$", re.IGNORECASE)
+
+
+def _fresh_cena_z_radku(text):
+    """Rozdělí text položky na (název, cena) podle ceny 've tvaru "xxx Kč" na konci řádku."""
+    m = FRESH_CENA_REGEX.search(text)
+    if not m:
+        return None, None
+    nazev = text[: m.start()].strip()
+    if not nazev:
+        return None, None
+    return nazev, m.group(1)
+
+
+def scrape_fresh_menu():
+    nazev = "Fresh Menu (Šumavská/Veveří)"
+    html = stahni("http://www.fresh-menu.cz/", nazev)
+    if html is None:
+        return nedostupne(nazev)
+
+    soup = BeautifulSoup(html, "html.parser")
+    pdf_url = None
+    for a in soup.find_all("a", href=True):
+        href = a["href"]
+        if "centrum_sumavska_veveri" in href.lower() and href.lower().endswith(".pdf"):
+            pdf_url = href
+            break
+
+    if not pdf_url:
+        print(f"  [{nazev}] Odkaz na týdenní menu nenalezen. Prvních 500 znaků:")
+        print(f"  {html[:500]}")
+        return nedostupne(nazev)
+
+    try:
+        pdf_response = requests.get(pdf_url, timeout=10)
+        if pdf_response.status_code != 200:
+            print(f"  [{nazev}] PDF HTTP {pdf_response.status_code} ({pdf_url})")
+            return nedostupne(nazev)
+    except requests.exceptions.RequestException as e:
+        print(f"  [{nazev}] Chyba sítě při stahování PDF: {e}")
+        return nedostupne(nazev)
+
+    try:
+        with pdfplumber.open(io.BytesIO(pdf_response.content)) as pdf:
+            text = "\n".join(page.extract_text() or "" for page in pdf.pages)
+    except Exception as e:
+        print(f"  [{nazev}] PDF se nepodařilo přečíst: {e}")
+        return nedostupne(nazev)
+
+    if not text.strip():
+        return nedostupne(nazev)
+
+    dnes = DNY_V_TYDNU[datetime.date.today().weekday()]
+
+    radky = [r.strip() for r in text.splitlines()]
+    dny_v_pdf = [(i, m.group(1)) for i, r in enumerate(radky) if (m := DEN_REGEX.match(r))]
+
+    sekce = None
+    for idx, (i, den) in enumerate(dny_v_pdf):
+        if den == dnes:
+            start = i + 1
+            konec = dny_v_pdf[idx + 1][0] if idx + 1 < len(dny_v_pdf) else len(radky)
+            sekce = radky[start:konec]
+            break
+
+    if sekce is None:
+        print(f"  [{nazev}] Sekce pro den '{dnes}' v PDF nenalezena.")
+        return nedostupne(nazev)
+
+    polozky = []
+    for radek in sekce:
+        polevka_m = FRESH_POLEVKA_REGEX.match(radek)
+        if polevka_m:
+            polozky.append({"nazev": polevka_m.group(1).strip(), "cena": "v ceně"})
+            continue
+        polozka_m = FRESH_POLOZKA_REGEX.match(radek)
+        if not polozka_m:
+            continue
+        jidlo, cena = _fresh_cena_z_radku(polozka_m.group(1))
+        if jidlo and cena:
+            polozky.append({"nazev": jidlo, "cena": f"{cena} Kč"})
+
+    # Očekáváme polévku + přesně 5 číslovaných jídel.
+    if len(polozky) != 6:
+        print(
+            f"  [{nazev}] Parsování PDF není spolehlivé, pro den '{dnes}' nalezeno "
+            f"{max(len(polozky) - 1, 0)}/5 položek s cenou."
+        )
+        return nedostupne(nazev)
+
+    return {"restaurace": nazev, "dostupne": True, "polozky": polozky}
+
+
 DREVAK_HEADER_REGEX = re.compile(
     r"^(Pondělí|Úterý|Středa|Čtvrtek|Pátek|Sobota|Neděle)\b.*?Polévka:\s*(.+)$"
 )
@@ -461,6 +556,7 @@ scrapery = [
     scrape_sono,
     scrape_u_primu,
     scrape_u_nemilosrdnych_bratri,
+    scrape_fresh_menu,
     scrape_u_drevaka,
     scrape_plzensky_dvur,
 ]
