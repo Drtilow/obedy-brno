@@ -73,8 +73,28 @@
   {
     "restaurace": "U Primů",
     "dostupne": true,
-    "typ": "obrazek",
-    "obrazek_url": "https://51ab6989b2.clvaw-cdnwnd.com/4fe39dd732ead9f425e69d5232108926/200001030-485b0485b2/menu%203.-7.8.2026.jpeg?ph=51ab6989b2"
+    "polozky": [
+      {
+        "nazev": "Krupicová s vejcem (a.9.)",
+        "cena": "v ceně"
+      },
+      {
+        "nazev": "Debrecinský vepřový guláš, houskový knedlík (a.1.3.7.)",
+        "cena": "154 Kč"
+      },
+      {
+        "nazev": "Smažená kuřecí kapsa s česnekem a nivou, šťouchané brambory, okurek (a.1.3.7.)",
+        "cena": "154 Kč"
+      },
+      {
+        "nazev": "Spanělský hovězí ptáček, dušená rýže (a.1.3.7.10)",
+        "cena": "159 Kč"
+      },
+      {
+        "nazev": "Grilované vepřové medailonky se slaninou a sazeným vejcem, hranolky, tatarka (a.1.3.7.)",
+        "cena": "159 Kč"
+      }
+    ]
   },
   {
     "restaurace": "U Nemilosrdných Bratří",

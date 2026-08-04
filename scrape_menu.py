@@ -172,7 +172,20 @@ def scrape_sono():
 
 PRIMU_POLEVKA_REGEX = re.compile(r"Pol[eé]vka\s*[-–:]?\s*(.+)$", re.IGNORECASE)
 PRIMU_POLOZKA_REGEX = re.compile(r"^\s*[1-4][.)]\s*(.+)$")
-PRIMU_CENA_REGEX = re.compile(r'^\d{2,4}[\s,.\-„"=]*$')
+# OCR obvykle nepozná dvousloupcový layout obrázku a cenu připojí rovnou
+# za text jídla na stejný řádek (např. "...tatarka (a.1.3.7.10.) 154 ,-").
+PRIMU_CENA_KONEC_REGEX = re.compile(r'(\d{2,4})\s*[\s,.\-;=„"]*$')
+
+
+def _primu_cena_z_radku(text):
+    """Rozdělí text položky na (název, cena) podle ceny na konci řádku."""
+    m = PRIMU_CENA_KONEC_REGEX.search(text)
+    if not m:
+        return None, None
+    nazev = text[: m.start()].strip().rstrip(",.-–;„\" ").strip()
+    if not nazev:
+        return None, None
+    return nazev, m.group(1)
 
 
 def scrape_u_primu():
@@ -221,21 +234,16 @@ def scrape_u_primu():
     radky = text.splitlines()
 
     # Bezpečnostní kontrola: párování podle pořadí je spolehlivé jen tehdy, když
-    # OCR najde přesně 5 "Polévka" (5 dní) a přesně 20 cen (5 dní × 4 jídla).
-    # Pokud se počty neshodují, jedno posunuté rozpoznání by přiřadilo špatné
-    # ceny/dny ke špatným jídlům, aniž by to bylo poznat — proto raději spadneme
-    # zpět na obrázek.
+    # OCR najde přesně 5 "Polévka" (5 dní) — jinak by index podle dne v týdnu
+    # mohl ukázat na špatný blok textu.
     polevka_indexy = [i for i, r in enumerate(radky) if PRIMU_POLEVKA_REGEX.search(r)]
-    ceny_radky = [r.strip() for r in radky if PRIMU_CENA_REGEX.match(r.strip())]
 
-    if len(polevka_indexy) != 5 or len(ceny_radky) != 20:
+    if len(polevka_indexy) != 5:
         print(
-            f"  [{nazev}] OCR rozpoznávání není spolehlivé, počet položek neodpovídá "
-            f"očekávání (polévek: {len(polevka_indexy)}/5, cen: {len(ceny_radky)}/20)."
+            f"  [{nazev}] OCR rozpoznávání není spolehlivé, nenalezeno přesně 5 "
+            f"řádků s polévkou (nalezeno {len(polevka_indexy)})."
         )
         return obrazek_zaznam
-
-    ceny = [re.match(r"\d{2,4}", r).group(0) for r in ceny_radky]
 
     blok_start = polevka_indexy[weekday]
     blok_konec = polevka_indexy[weekday + 1] if weekday + 1 < len(polevka_indexy) else len(radky)
@@ -243,20 +251,21 @@ def scrape_u_primu():
 
     polevka_nazev = PRIMU_POLEVKA_REGEX.search(blok[0]).group(1).strip()
 
-    jidla = []
+    polozky = [{"nazev": polevka_nazev, "cena": "v ceně"}]
     for radek in blok[1:]:
         m = PRIMU_POLOZKA_REGEX.match(radek.strip())
-        if m:
-            jidla.append(m.group(1).strip())
+        if not m:
+            continue
+        jidlo, cena = _primu_cena_z_radku(m.group(1))
+        if jidlo and cena:
+            polozky.append({"nazev": jidlo, "cena": f"{cena} Kč"})
 
-    ceny_pro_den = ceny[weekday * 4 : weekday * 4 + 4]
-
-    polozky = [{"nazev": polevka_nazev, "cena": "v ceně"}]
-    for jidlo, cena in zip(jidla, ceny_pro_den):
-        polozky.append({"nazev": jidlo, "cena": f"{cena} Kč"})
-
-    if len(polozky) <= 1:
-        print(f"  [{nazev}] OCR rozpoznávání není spolehlivé, pro dnešní den nenalezeny žádné položky.")
+    # Pro dnešní den očekáváme polévku + přesně 4 číslované položky s cenou.
+    if len(polozky) != 5:
+        print(
+            f"  [{nazev}] OCR rozpoznávání není spolehlivé, pro dnešní den nalezeno "
+            f"{len(polozky) - 1}/4 položek s cenou."
+        )
         return obrazek_zaznam
 
     return {"restaurace": nazev, "dostupne": True, "polozky": polozky}
