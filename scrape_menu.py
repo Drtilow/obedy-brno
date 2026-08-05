@@ -554,11 +554,11 @@ scrapery = [
     scrape_korzar,
     scrape_pizzerie_viva,
     scrape_sono,
-    scrape_u_primu,
-    scrape_u_nemilosrdnych_bratri,
     scrape_fresh_menu,
-    scrape_u_drevaka,
     scrape_plzensky_dvur,
+    scrape_u_nemilosrdnych_bratri,
+    scrape_u_primu,
+    scrape_u_drevaka,
 ]
 vysledky = []
 

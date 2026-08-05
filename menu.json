@@ -79,54 +79,6 @@
     "duvod": "Menu není dostupné"
   },
   {
-    "restaurace": "U Primů",
-    "dostupne": true,
-    "polozky": [
-      {
-        "nazev": "— Hrachová se slaninou (a.1.)",
-        "cena": "v ceně"
-      },
-      {
-        "nazev": "Kynuté borůvkové knedlíky s tvarohem a borůvkovým přelivem (a.1.3.7.)",
-        "cena": "154 Kč"
-      },
-      {
-        "nazev": "Živáňská vepřová pečeně, opékaný brambor, tatarka (a.1.3.7.10.)",
-        "cena": "154 Kč"
-      },
-      {
-        "nazev": "Smažená kuřecí kapsa se šunkou a tvarůžkem, šťouchané brambory (a.1.3.7.)",
-        "cena": "159 Kč"
-      },
-      {
-        "nazev": "Medailonky z vepřové panenky, grilovaný kukuřičný klas, americké brambory, tatarka(1.3.7.10.)",
-        "cena": "159 Kč"
-      }
-    ]
-  },
-  {
-    "restaurace": "U Nemilosrdných Bratří",
-    "dostupne": true,
-    "polozky": [
-      {
-        "nazev": "0,2l Tomatová polévka s bazalkou (9,1,3,6,7)",
-        "cena": "v ceně"
-      },
-      {
-        "nazev": "150g Smažený květák, vařené brambory, tatarská omáčka (1,3,6,5)",
-        "cena": "189,-"
-      },
-      {
-        "nazev": "150g Kuřecí prsíčko v paprikovo-smetanová omáčka, těstoviny (1,3,4,7)",
-        "cena": "189,-"
-      },
-      {
-        "nazev": "150g Salát s pečenou dýní, dýňové semínko, kuřecí prso, pomerančový dresink(1,2,3,4,6)",
-        "cena": "189,-"
-      }
-    ]
-  },
-  {
     "restaurace": "Fresh Menu (Šumavská/Veveří)",
     "dostupne": true,
     "polozky": [
@@ -157,6 +109,76 @@
     ]
   },
   {
+    "restaurace": "Plzeňský dvůr",
+    "dostupne": true,
+    "polozky": [
+      {
+        "nazev": "Zeleninová polévka",
+        "cena": "v ceně"
+      },
+      {
+        "nazev": "150g Pečená vepřová krkovice se švestkovou omáčkou, opékané brambory",
+        "cena": "179 Kč"
+      },
+      {
+        "nazev": "150g Koprová omáčka s vařeným vejcem, houskové knedlíky",
+        "cena": "159 Kč"
+      },
+      {
+        "nazev": "150g Kuřecí steak teriaky, dušená rýže",
+        "cena": "159 Kč"
+      }
+    ]
+  },
+  {
+    "restaurace": "U Nemilosrdných Bratří",
+    "dostupne": true,
+    "polozky": [
+      {
+        "nazev": "0,2l Tomatová polévka s bazalkou (9,1,3,6,7)",
+        "cena": "v ceně"
+      },
+      {
+        "nazev": "150g Smažený květák, vařené brambory, tatarská omáčka (1,3,6,5)",
+        "cena": "189,-"
+      },
+      {
+        "nazev": "150g Kuřecí prsíčko v paprikovo-smetanová omáčka, těstoviny (1,3,4,7)",
+        "cena": "189,-"
+      },
+      {
+        "nazev": "150g Salát s pečenou dýní, dýňové semínko, kuřecí prso, pomerančový dresink(1,2,3,4,6)",
+        "cena": "189,-"
+      }
+    ]
+  },
+  {
+    "restaurace": "U Primů",
+    "dostupne": true,
+    "polozky": [
+      {
+        "nazev": "— Hrachová se slaninou (a.1.)",
+        "cena": "v ceně"
+      },
+      {
+        "nazev": "Kynuté borůvkové knedlíky s tvarohem a borůvkovým přelivem (a.1.3.7.)",
+        "cena": "154 Kč"
+      },
+      {
+        "nazev": "Živáňská vepřová pečeně, opékaný brambor, tatarka (a.1.3.7.10.)",
+        "cena": "154 Kč"
+      },
+      {
+        "nazev": "Smažená kuřecí kapsa se šunkou a tvarůžkem, šťouchané brambory (a.1.3.7.)",
+        "cena": "159 Kč"
+      },
+      {
+        "nazev": "Medailonky z vepřové panenky, grilovaný kukuřičný klas, americké brambory, tatarka(1.3.7.10.)",
+        "cena": "159 Kč"
+      }
+    ]
+  },
+  {
     "restaurace": "U Dřeváka Beer&Grill",
     "dostupne": true,
     "polozky": [
@@ -179,28 +201,6 @@
       {
         "nazev": "Gratinovaný kuřecí steak s rajčaty zapečený mozzarellou, grilovaná zelenina, opékané brambory, jogurtový dresink (6,7,9), 140g",
         "cena": "179"
-      }
-    ]
-  },
-  {
-    "restaurace": "Plzeňský dvůr",
-    "dostupne": true,
-    "polozky": [
-      {
-        "nazev": "Zeleninová polévka",
-        "cena": "v ceně"
-      },
-      {
-        "nazev": "150g Pečená vepřová krkovice se švestkovou omáčkou, opékané brambory",
-        "cena": "179 Kč"
-      },
-      {
-        "nazev": "150g Koprová omáčka s vařeným vejcem, houskové knedlíky",
-        "cena": "159 Kč"
-      },
-      {
-        "nazev": "150g Kuřecí steak teriaky, dušená rýže",
-        "cena": "159 Kč"
       }
     ]
   }
