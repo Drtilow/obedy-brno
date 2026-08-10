@@ -147,8 +147,28 @@
   {
     "restaurace": "U Primů",
     "dostupne": true,
-    "typ": "obrazek",
-    "obrazek_url": "https://51ab6989b2.clvaw-cdnwnd.com/4fe39dd732ead9f425e69d5232108926/200001032-16a9d16aa0/v%C3%ADkendov%C3%A9%20menu%208.-9.8.2026.jpeg?ph=51ab6989b2"
+    "polozky": [
+      {
+        "nazev": "Jarní zeleninová (a. 1.7.9.)",
+        "cena": "v ceně"
+      },
+      {
+        "nazev": "Smažený „Hermelín“, vařené brambory, tatarka (a.1.3.7.)",
+        "cena": "154 Kč"
+      },
+      {
+        "nazev": "Plněná kuřecí roláda, bramborová kaše, okurek (a.1.3.7.)",
+        "cena": "154 Kč"
+      },
+      {
+        "nazev": "Hovězí plec na houbách, těstoviny (houskový knedlík) (a.1.3.7.)",
+        "cena": "59 Kč"
+      },
+      {
+        "nazev": "Grilovaná kuřecí prsíčka se šunkou a sýrem, hranolky, tatarka (a.1.3.)",
+        "cena": "1595 Kč"
+      }
+    ]
   },
   {
     "restaurace": "U Dřeváka Beer&Grill",
