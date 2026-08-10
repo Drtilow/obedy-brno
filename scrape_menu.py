@@ -141,36 +141,38 @@ def scrape_sono():
     if html is None:
         return nedostupne(nazev)
 
-    soup = BeautifulSoup(html, "html.parser")
-
-    # Zkus najít blok s denním menu — selektory uprav podle skutečné struktury stránky
-    menu_blok = (
-        soup.find(class_="daily-menu")
-        or soup.find(class_="lunch-menu")
-        or soup.find(class_="poledni-menu")
-        or soup.find(id="daily-menu")
-    )
-    if not menu_blok:
-        print(f"  [{nazev}] Blok s menu nenalezen. Prvních 500 znaků:")
-        print(f"  {html[:500]}")
+    dnesni_den = datetime.date.today().weekday()  # 0 = Pondělí
+    if dnesni_den > 4:
         return nedostupne(nazev)
 
+    soup = BeautifulSoup(html, "html.parser")
+
+    # Stránka (Webnode CMS) strukturuje menu takto:
+    # - každý den týdne je nadpis <h1> (Pondělí–Pátek)
+    # - jídla jsou <p> elementy ve tvaru "Název  cena,-"
+    DNY = {"pondělí": 0, "úterý": 1, "středa": 2, "čtvrtek": 3, "pátek": 4}
+    cena_re = re.compile(r"^(.+?)\s{2,}(\d{2,4}),-\s*$")
+
     polozky = []
-    for radek in menu_blok.find_all(["li", "tr"]):
-        nazev_el = radek.find(class_=lambda c: c and "item" in c.lower())
-        if not nazev_el:
-            continue
-        jidlo = nazev_el.get_text(strip=True)
-        if jidlo:
-            polozky.append({"nazev": jidlo, "cena": "v ceně"})
+    aktualni_den = None
+
+    for el in soup.find_all(["h1", "p"]):
+        text = el.get_text(separator=" ", strip=True)
+        if el.name == "h1":
+            aktualni_den = DNY.get(text.lower())
+        elif el.name == "p" and aktualni_den == dnesni_den:
+            m = cena_re.match(text)
+            if m:
+                polozky.append({"nazev": m.group(1).strip(), "cena": f"{m.group(2)} Kč"})
 
     if not polozky:
+        print(f"  [{nazev}] Žádné položky pro dnešní den nenalezeny.")
         return nedostupne(nazev)
 
     return {"restaurace": nazev, "dostupne": True, "polozky": polozky}
 
 
-PRIMU_POLEVKA_REGEX = re.compile(r"Pol[eé]vka\s*[-–:]?\s*(.+)$", re.IGNORECASE)
+PRIMU_POLEVKA_REGEX = re.compile(r"Pol[eé]vka\s*[-–—:]?\s*(.+)$", re.IGNORECASE)
 PRIMU_POLOZKA_REGEX = re.compile(r"^\s*[1-4][.)]\s*(.+)$")
 # OCR obvykle nepozná dvousloupcový layout obrázku a cenu připojí rovnou
 # za text jídla na stejný řádek (např. "...tatarka (a.1.3.7.10.) 154 ,-").
@@ -243,7 +245,7 @@ def scrape_u_primu():
             f"  [{nazev}] OCR rozpoznávání není spolehlivé, nenalezeno přesně 5 "
             f"řádků s polévkou (nalezeno {len(polevka_indexy)})."
         )
-        return obrazek_zaznam
+        return nedostupne(nazev, "Dnešní menu ještě není k dispozici")
 
     blok_start = polevka_indexy[weekday]
     blok_konec = polevka_indexy[weekday + 1] if weekday + 1 < len(polevka_indexy) else len(radky)
@@ -266,7 +268,7 @@ def scrape_u_primu():
             f"  [{nazev}] OCR rozpoznávání není spolehlivé, pro dnešní den nalezeno "
             f"{len(polozky) - 1}/4 položek s cenou."
         )
-        return obrazek_zaznam
+        return nedostupne(nazev, "Dnešní menu se nepodařilo přečíst")
 
     return {"restaurace": nazev, "dostupne": True, "polozky": polozky}
 
