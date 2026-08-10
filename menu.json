@@ -71,8 +71,21 @@
   },
   {
     "restaurace": "SONO Grill & Bar",
-    "dostupne": false,
-    "duvod": "Menu není dostupné"
+    "dostupne": true,
+    "polozky": [
+      {
+        "nazev": "Pórkový krém, vejce, kruton",
+        "cena": "75 Kč"
+      },
+      {
+        "nazev": "ZNOJEMSKÁ HOVĚZÍ PEČENĚ, JASMÍNOVÁ RÝŽE, PAŽITKA",
+        "cena": "205 Kč"
+      },
+      {
+        "nazev": "PENNE ARRABIATA, ČERVENÁ CIBULE, OLIVY, BAZALKA",
+        "cena": "175 Kč"
+      }
+    ]
   },
   {
     "restaurace": "Fresh Menu (Šumavská/Veveří)",
