@@ -32,3 +32,5 @@ pak potvrď `Enter`). Zavření prohlížeče samo o sobě server nevypíná.
 
 Na počítači musí být nainstalovaný Python (příkaz `python` musí fungovat v terminálu) —
 pokud fungovalo stahování menu doteď, je vše v pořádku a nemusíš nic řešit.
+
+- test gitu
