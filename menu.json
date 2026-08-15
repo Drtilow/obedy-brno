@@ -1,212 +1,47 @@
 [
   {
     "restaurace": "Korzar",
-    "dostupne": true,
-    "polozky": [
-      {
-        "nazev": "Gulášová s bramborem a majoránkou",
-        "cena": "v ceně"
-      },
-      {
-        "nazev": "Česnekové řízečky z vepřové panenky, bramborový salát",
-        "cena": "189 Kč"
-      },
-      {
-        "nazev": "Teplé hovězí pastrami, křenová omáčka, houskový knedlík",
-        "cena": "199 Kč"
-      },
-      {
-        "nazev": "Bezlepkové-Kuřecí satay špízky, arašídová omáčka, jasmínová rýže",
-        "cena": "189 Kč"
-      },
-      {
-        "nazev": "Grilovaný Halloumi, mix salátů s rajčetem a okurkou, zálivka z javorového sirupu a oregána, foccacia",
-        "cena": "199 Kč"
-      },
-      {
-        "nazev": "Bezlepkové-Hovězí znojemská pečeně, jasmínová rýže",
-        "cena": "199 Kč"
-      }
-    ]
+    "dostupne": false,
+    "duvod": "Menu není dostupné"
   },
   {
     "restaurace": "Pizzerie VIVA",
-    "dostupne": true,
-    "den": "pátek",
-    "datum": "14. srpna 2026",
-    "polozky": [
-      {
-        "nazev": "polévka gulášová",
-        "cena": "v ceně"
-      },
-      {
-        "nazev": "1. holandský řízek, bramborová kaše, naše čalamáda",
-        "cena": "187,-"
-      },
-      {
-        "nazev": "2. pečená kachní játra na naší máslové briošce, meruňkovo-cibulové chutney, lanýžový olej",
-        "cena": "192,-"
-      },
-      {
-        "nazev": "3. spaghetti BOSCAIOLA, hrášek, žampiony, šunka, víno, gran moravia",
-        "cena": "195,-"
-      },
-      {
-        "nazev": "4. pizza – sugo, mozzarella, šunka, kukuřice",
-        "cena": "195,-"
-      },
-      {
-        "nazev": "5. meruňkové knedlíky se strouhaným tvarohem, máslo, cukr",
-        "cena": "187,-"
-      },
-      {
-        "nazev": "6. salát CAESAR – kuře, římské listy, cherry rajčata, anchoa dresink, krutony, parmezán",
-        "cena": "198,-"
-      }
-    ]
+    "dostupne": false,
+    "duvod": "Menu není dostupné"
   },
   {
     "restaurace": "SONO Grill & Bar",
-    "dostupne": true,
-    "polozky": [
-      {
-        "nazev": "Česnečka, chlebový kruton, sýr",
-        "cena": "75 Kč"
-      },
-      {
-        "nazev": "GULÁŠ, CIBULOVÝ SALÁT, KARLOVARSKÝ KNEDLÍK",
-        "cena": "195 Kč"
-      },
-      {
-        "nazev": "PEČENÉ KUŘECÍ STEHNO, JASMINOVÁ RÝŽE, OKURKOVÝ SALÁT",
-        "cena": "185 Kč"
-      }
-    ]
+    "dostupne": false,
+    "duvod": "Menu není dostupné"
   },
   {
     "restaurace": "Fresh Menu (Šumavská/Veveří)",
-    "dostupne": true,
-    "polozky": [
-      {
-        "nazev": "Boršč (1,7,9)",
-        "cena": "v ceně"
-      },
-      {
-        "nazev": "350g Špenátové lasagne s mozzarellou, listové saláty (1,3,7)",
-        "cena": "139 Kč"
-      },
-      {
-        "nazev": "120g Smažený kuřecí řízek, vařené brambory s máslem, obloha (1,3,7,9)",
-        "cena": "139 Kč"
-      },
-      {
-        "nazev": "350g Brynzové halušky s opečenou slaninou (1,3,7)",
-        "cena": "149 Kč"
-      },
-      {
-        "nazev": "120g Znojemská hovězí pečeně, dušená rýže (-) BL",
-        "cena": "149 Kč"
-      },
-      {
-        "nazev": "350g Čočkový salát s grilovaným tuňákem, zelenina (4,9,10) BL",
-        "cena": "155 Kč"
-      }
-    ]
+    "dostupne": false,
+    "duvod": "Menu není dostupné"
   },
   {
     "restaurace": "Plzeňský dvůr",
     "dostupne": true,
     "polozky": [
       {
-        "nazev": "Gulášová polévka",
-        "cena": "v ceně"
-      },
-      {
         "nazev": "120g Zeleninový salát s grilovaným camembertem a kousky pečené hrušky",
         "cena": "179 Kč"
-      },
-      {
-        "nazev": "250g Bramborové knedlíky plněné ovocem, sypané cukrem",
-        "cena": "159 Kč"
-      },
-      {
-        "nazev": "150g Smažená kuřecí prsa v pivním těstíčku, vařené brambory",
-        "cena": "159 Kč"
       }
     ]
   },
   {
     "restaurace": "U Nemilosrdných Bratří",
-    "dostupne": true,
-    "polozky": [
-      {
-        "nazev": "0,2l Asijský vývar s miso pastou, rýžové nudle (1,7,9,6)",
-        "cena": "v ceně"
-      },
-      {
-        "nazev": "200g Caesar WRAP, hranolky (1,3,5)",
-        "cena": "199,-"
-      },
-      {
-        "nazev": "150g Salát Nicoise (brambory, vejce, rajče, fazolky, grilovaný hermelín, mayo z hrubozrnné hořčice)",
-        "cena": "199,-"
-      },
-      {
-        "nazev": "150g Kuřecí kung-pao, jasmínová rýže (1,2,3,4,6)",
-        "cena": "189,-"
-      }
-    ]
+    "dostupne": false,
+    "duvod": "Menu není dostupné"
   },
   {
     "restaurace": "U Primů",
-    "dostupne": true,
-    "polozky": [
-      {
-        "nazev": "Hovězí vývar s rýží a hráškem (a.9.)",
-        "cena": "v ceně"
-      },
-      {
-        "nazev": "Smažené česnekové řízečky, bramborový salát s majonézou (a.1.3.7.10.)",
-        "cena": "154 Kč"
-      },
-      {
-        "nazev": "Kuřecí jehla ( anglická slanina, klobása, cibule, paprika), šťouchané brambory (a.1.)",
-        "cena": "154 Kč"
-      },
-      {
-        "nazev": "Hovězí nudličky „Stroganow“, dušená rýže (a. 1.3.7)",
-        "cena": "159 Kč"
-      },
-      {
-        "nazev": "Grilovaná kuřecí prsíčka s broskví a sýrem, hranolky, tatarka (a.1.)",
-        "cena": "159 Kč"
-      }
-    ]
+    "dostupne": false,
+    "duvod": "Menu není dostupné"
   },
   {
     "restaurace": "U Dřeváka Beer&Grill",
-    "dostupne": true,
-    "polozky": [
-      {
-        "nazev": "Hráškový krém (1,6,7,9)",
-        "cena": "v ceně"
-      },
-      {
-        "nazev": "Plněný paprikový lusk s rajskou omáčkou, houskové knedlíky (1,3,6,7,9), 100g",
-        "cena": "169"
-      },
-      {
-        "nazev": "Variace smažených sýrů, vařené brambory s pažitkou, salátek a tatarská omáčka (1,3,6,7,9,10), 100g",
-        "cena": "169"
-      },
-      {
-        "nazev": "Philly Cheese Bowl (hovězí maso, teplá cheddarová omáčka, grilovaná bíla cibule, grilovaná paprika, chipotle mayo), hranolky a dresink (1,3,7), 80g",
-        "cena": "209"
-      },
-      {
-        "nazev": "Kuřecí steak \"Caprese\" (Zapečený mozzarelou, rajčaty a bazalkou) americké brambory, česnekový dip (1, 3,6,7,9), 140g",
-        "cena": "179"
-      }
-    ]
+    "dostupne": false,
+    "duvod": "Menu není dostupné"
   }
 ]
