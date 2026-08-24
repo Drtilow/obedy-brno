@@ -364,6 +364,14 @@
     return `${cislice} Kč`;
   }
 
+  function normalizujText(text) {
+    const bezCislic = text.replace(/[\d\s,.-]/g, '');
+    if (bezCislic.length > 0 && bezCislic === bezCislic.toUpperCase()) {
+      return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
+    }
+    return text;
+  }
+
   function rozpoznejPoznamku(nazev) {
     const m = nazev.match(/^\s*(bezlepkov[ée])[-\s]*/i);
     if (!m) return { poznamka: null, nazev };
@@ -371,7 +379,8 @@
   }
 
   function vytvorPolozkuHtml(polozka) {
-    const { poznamka, nazev } = rozpoznejPoznamku(polozka.nazev);
+    const { poznamka, nazev: nazevRaw } = rozpoznejPoznamku(polozka.nazev);
+    const nazev = normalizujText(nazevRaw);
     return `
       <div class="food-item">
         <span class="food-number display-font">${polozka.cislo}</span>
