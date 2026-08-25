@@ -4,20 +4,24 @@
     "dostupne": true,
     "polozky": [
       {
-        "nazev": "Hráškový krém s mátou, krutony",
+        "nazev": "Fazolová s uzeninou",
         "cena": "v ceně"
       },
       {
-        "nazev": "Bezlepkové-Telecí nudličky v teriyaki omáčce s čerstvou zeleninou, jasmínová rýže",
-        "cena": "209 Kč"
+        "nazev": "1 varianta) Käsespätzle, smažená cibulka, hovězí Flank steak (Irsko), salátek",
+        "cena": "259 Kč"
       },
       {
-        "nazev": "Kuřecí roláda plněná estragonovou nádivkou, bramborová kaše, salátek",
-        "cena": "189 Kč"
+        "nazev": "2 varianta) Käsespätzle, smažená cibulka, uzený tyrolský speck, salátek",
+        "cena": "179 Kč"
       },
       {
-        "nazev": "Lasagne bolognese, milanská omáčka, bazalka",
-        "cena": "199 Kč"
+        "nazev": "Domácí sekaná pečeně se sýrem, bramborová kaše, rajčatový salát",
+        "cena": "179 Kč"
+      },
+      {
+        "nazev": "Bezlepkové-Kuřecí kung pao s čerstvou zeleninou, jasmínová rýže",
+        "cena": "179 Kč"
       },
       {
         "nazev": "Bezlepkové-Hovězí španělský ptáček, jasmínová rýže, silný výpek",
@@ -32,32 +36,32 @@
   {
     "restaurace": "Pizzerie VIVA",
     "dostupne": true,
-    "den": "pondělí",
-    "datum": "24. srpna 2026",
+    "den": "úterý",
+    "datum": "25. srpna 2026",
     "polozky": [
       {
-        "nazev": "polévka kořeněná rajčatová s kokosem a rýží",
+        "nazev": "polévka brokolicová s krutony",
         "cena": "v ceně"
       },
       {
-        "nazev": "1. grilovaná kuřecí prsa, quacamole, sázené vejce, smažené brambory",
+        "nazev": "1. plněná paprika mletým masem, rajčatová omáčka, kolínka s přepuštěným máslem",
         "cena": "187,-"
       },
       {
-        "nazev": "2. gratinovaná treska",
+        "nazev": "2. kuřecí GYROS, tzatziki, rajčata, bramborové hranolky",
         "cena": "192,-"
       },
       {
-        "nazev": "3. čerstvá pasta – chorizo, rajčata San Marzano, česnek, chilli, gran moravia",
-        "cena": "195,-"
-      },
-      {
-        "nazev": "4. pizza – sugo, mozzarella, prosciutto  crudo, rukola",
+        "nazev": "3. rýžové nudle “TOM YUM“, krevety, shitake houby, limeta, koriandr",
         "cena": "198,-"
       },
       {
-        "nazev": "5. bryndzové halušky se slaninou,",
-        "cena": "195,-"
+        "nazev": "4. náš AVOCADO chléb, hovězí roastbeef, sázené vejce, salátek, rajčata, cornichons",
+        "cena": "198,-"
+      },
+      {
+        "nazev": "5. květákové placky s čočkovým curry",
+        "cena": "187,-"
       },
       {
         "nazev": "6. pečený kozí sýr, listy salátu, hrušky, plátky okurek, naše slaná granola, brusinkový dresink",
@@ -70,16 +74,16 @@
     "dostupne": true,
     "polozky": [
       {
-        "nazev": "Frankfurtská polévka, čerstvá majoránka",
-        "cena": "75 Kč"
+        "nazev": "Kuřecí vývar, játrový knedlíček, nudle",
+        "cena": "55 Kč"
       },
       {
-        "nazev": "SEKANÁ PEČENĚ, BRAMBOROVÁ KAŠE, NAKLÁDANÝ OKUREK",
+        "nazev": "HOLANDSKÝ ŘÍZEK, BRAMBOROVÁ KAŠE, OKURKOVÝ SALÁT",
         "cena": "185 Kč"
       },
       {
-        "nazev": "PENNE S KUŘECÍM MASEM, ŠPENÁT, SMETANA, GRANA PADANO",
-        "cena": "195 Kč"
+        "nazev": "HALUŠKY S BRYNDZOU, SLANINA",
+        "cena": "175 Kč"
       }
     ]
   },
@@ -88,23 +92,23 @@
     "dostupne": true,
     "polozky": [
       {
-        "nazev": "Jarní zeleninová s vejci (3,9)",
+        "nazev": "Italská rajčatová (1)",
         "cena": "v ceně"
       },
       {
-        "nazev": "150g Smažené žampiony, vařené brambory, domácí tatarská omáčka (1,3,7,10)",
+        "nazev": "350g Bramborové gnocchi s houbovým ragú sypané parmazánem, petrželka (1,3,7)",
         "cena": "139 Kč"
       },
       {
-        "nazev": "120g Rizoto s kuřecím masem, strouhaný sýr, okurek (7,9) BL",
+        "nazev": "120g Bratislavská vepřová plec, houskové knedlíky (1,3,7,9)",
         "cena": "139 Kč"
       },
       {
-        "nazev": "150g Vepřová kotleta po cikánsku, dušená rýže (1)",
+        "nazev": "250g Pečené kuře na másle, vařené brambory (7) BL",
         "cena": "149 Kč"
       },
       {
-        "nazev": "150g Grilované kuřecí prsíčko s glazovanou mini karotkou, kuskus (1,7)",
+        "nazev": "120g Štěpánská hovězí pečeně, dušená rýže (1,3)",
         "cena": "149 Kč"
       },
       {
@@ -118,7 +122,7 @@
     "dostupne": true,
     "polozky": [
       {
-        "nazev": "Čočková polévka se zeleninou",
+        "nazev": "Pórková polévka s vejcem",
         "cena": "v ceně"
       },
       {
@@ -126,11 +130,11 @@
         "cena": "179 Kč"
       },
       {
-        "nazev": "150g Krůtí maso na paprice, houskové knedlíky",
+        "nazev": "300g Francouzské brambory, čalamáda",
         "cena": "159 Kč"
       },
       {
-        "nazev": "150g Pečené čevapčiči zdobené cibulí a hořčicí, vařené brambory",
+        "nazev": "150g Špíz z kuřecího a vepřového masa, americké brambory s česnekem",
         "cena": "159 Kč"
       }
     ]
@@ -140,19 +144,19 @@
     "dostupne": true,
     "polozky": [
       {
-        "nazev": "0,2l Indická polévka s čočkou",
+        "nazev": "0,2l Drůbeží vývar s hráškem a nudlemi (9,1,3,6)",
         "cena": "v ceně"
       },
       {
-        "nazev": "150g Smažený sýr, vařené brambory, tatarská omáčka (1,2,3,5,8)",
+        "nazev": "150g Křenová omáčka s uzeným masem, houskový knedlík (1,3,6,7)",
         "cena": "189,-"
       },
       {
-        "nazev": "150g Hovězí masové kuličky v rajské omáčce (1,2,4,6,7)",
+        "nazev": "150g Špagety aglio olio (1,2,3,5,7)",
         "cena": "189,-"
       },
       {
-        "nazev": "150g Kuřecí steak, omáčka z uzené slaniny, americké brambory (1,2,3,4,6)",
+        "nazev": "150g Kuřecí řízek, bramborový salát s majonézou (1,2,3,4,6)",
         "cena": "189,-"
       }
     ]
@@ -167,23 +171,23 @@
     "dostupne": true,
     "polozky": [
       {
-        "nazev": "Česnečka se zeleninou a brambory (1,6,7,9)",
+        "nazev": "Hovězí vývar se zeleninou a nudlemi (1,6,7,9)",
         "cena": "v ceně"
       },
       {
-        "nazev": "Smažený holandský řízek se sýrem, bramborová kaše a kyselá okurka (1,3,6,7,9), 130g",
+        "nazev": "Pečené kuřecí stehýnko s nádivkou, jasmínová rýže (1,6,9), 240g",
         "cena": "169"
       },
       {
-        "nazev": "Lasagne s hovězím boloňským masovým ragú, sýr Gran Moravia a salátkem (1,6,7,9), 80g",
-        "cena": "189"
+        "nazev": "Vepřové výpečky se smetanovým listovým špenátem a bramborovými knedlíky (1,3,6,7,9), 120g",
+        "cena": "185"
       },
       {
-        "nazev": "Tortilla plněná grilovanými kuřecími prsíčky, cheddarem, rajčátky, salátem a dipem, hranolky s dresinkem (1,3,6,7,9), 80g",
-        "cena": "179"
+        "nazev": "1940´s MENU Burger (hovězí mleté, Cheddar, červená cibule, Heinz kečup, Americká hořčice) hranolky a dresink (1,3,6,7,9,10), 80g",
+        "cena": "209"
       },
       {
-        "nazev": "Grilovaná vepřová kotleta s krémovou dijonskou omáčkou, pečené slaninové brambory a salátek (1,6,7,9,10), 150g",
+        "nazev": "Grilované kuřecí prsíčko, grilovaná kukuřice se slaninou a vařené brambory s pažitkou (1,3,6,7,9), 140g",
         "cena": "179"
       }
     ]
