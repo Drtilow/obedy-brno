@@ -1,0 +1,156 @@
+[
+  {
+    "restaurace": "Korzar",
+    "dostupne": true,
+    "polozky": [
+      {
+        "nazev": "Kuřecí vývar s masem a nudlemi",
+        "cena": "v ceně"
+      },
+      {
+        "nazev": "Švédské masové kuličky, pepřová omáčka s whiskey, hranolky, brusinky",
+        "cena": "179 Kč"
+      },
+      {
+        "nazev": "Bezlepkové-Uzené kachní prso, grepová omáčka s portským vínem, grenaille, rebarbora",
+        "cena": "209 Kč"
+      },
+      {
+        "nazev": "Bramborové knedlíky plněné uzeným masem, kysané zelí, cibulka",
+        "cena": "179 Kč"
+      },
+      {
+        "nazev": "Hovězí svíčková na smetaně, naše brusinky, terčík, karlovarský knedlík",
+        "cena": "239 Kč"
+      },
+      {
+        "nazev": "Bezlepkové-Kuřecí kung pao s čerstvou zeleninou,  jasmínová rýže",
+        "cena": "179 Kč"
+      }
+    ]
+  },
+  {
+    "restaurace": "Pizzerie VIVA",
+    "dostupne": true,
+    "den": "středa",
+    "datum": "29. července 2026",
+    "polozky": [
+      {
+        "nazev": "polévka kuřecí vývar s vůní asie",
+        "cena": "v ceně"
+      },
+      {
+        "nazev": "1. pomalu pečené trhané hovězí, uzená BBQ omáčka, glazovaná karotka, kapustičky, brambor",
+        "cena": "195,-"
+      },
+      {
+        "nazev": "2. kuřecí „STIR – FRY“ s brokolicí, bambusem, kešu, jasmínová rýže",
+        "cena": "187,-"
+      },
+      {
+        "nazev": "3. risotto – kukuřice, krémový sýr, sázené vejce, gran moravia",
+        "cena": "195,-"
+      },
+      {
+        "nazev": "4. pizza QF",
+        "cena": "195,-"
+      },
+      {
+        "nazev": "5. thajské skleněné nudle s restovanou zeleninou, tofu, edamane, kikoman, sezam",
+        "cena": "187,-"
+      },
+      {
+        "nazev": "6. salát řecký selský – rajčata, okurka, červená cibule, olivy, slaný sýr , oregano",
+        "cena": "195,-"
+      },
+      {
+        "nazev": "7. PLATÝS filet na grilu, šalotková omáčka s estragonem, pečená cherry rajčata, mladé brambory, micro greens, veltlín",
+        "cena": "235,-"
+      }
+    ]
+  },
+  {
+    "restaurace": "SONO Grill & Bar",
+    "dostupne": false,
+    "duvod": "Menu není dostupné"
+  },
+  {
+    "restaurace": "U Primů",
+    "dostupne": true,
+    "polozky": [
+      {
+        "nazev": "Žampionový krém (a.1.3.9)",
+        "cena": "v ceně"
+      },
+      {
+        "nazev": "Bramborové taštičky plněné hruškovými povidly s mákem, cukrem, polité máslem (a.1.3.7.)",
+        "cena": "154 Kč"
+      },
+      {
+        "nazev": "Vepřový špalík, vařené vejce, fazolové lusky na kyselo, vařený brambor",
+        "cena": "154 Kč"
+      },
+      {
+        "nazev": "Cmunda po Kaplicku (bramborák se zelím a uzeným masem) (a.1.3.7.)",
+        "cena": "159 Kč"
+      },
+      {
+        "nazev": "Smažený „ Cordon Bleu“, vařený brambor, tatarka (a.1.3.7.10)",
+        "cena": "159 Kč"
+      }
+    ]
+  },
+  {
+    "restaurace": "U Nemilosrdných Bratří",
+    "dostupne": false,
+    "duvod": "Menu není dostupné"
+  },
+  {
+    "restaurace": "U Dřeváka Beer&Grill",
+    "dostupne": true,
+    "polozky": [
+      {
+        "nazev": "Gulášová z vepřového masa s brambory (1,6,9)",
+        "cena": "v ceně"
+      },
+      {
+        "nazev": "Švédské masové kuličky s bramborovou kaší, brusinkami a salátkem (1,3,6,7,9), 120g",
+        "cena": "169"
+      },
+      {
+        "nazev": "Španělský vepřový ptáček s jasmínovou rýží (1,3,6,9), 140g",
+        "cena": "169"
+      },
+      {
+        "nazev": "Pulled Pork Quesadilla (Trhané vepřové maso, cheddar, kukuřice), zakysaná smetana a hranolky (1,3,6,7,9), 80g",
+        "cena": "179"
+      },
+      {
+        "nazev": "Gratinovaný kuřecí steak se sýrovou omáčkou, opékané brambory, salátek (6,7,9), 140g",
+        "cena": "179"
+      }
+    ]
+  },
+  {
+    "restaurace": "Plzeňský dvůr",
+    "dostupne": true,
+    "polozky": [
+      {
+        "nazev": "Jarní zeleninová polévka",
+        "cena": "v ceně"
+      },
+      {
+        "nazev": "150g Smažené řízečky z vepřové panenky, vídeňský bramborový salát",
+        "cena": "179 Kč"
+      },
+      {
+        "nazev": "300g Špenátové lasagne",
+        "cena": "159 Kč"
+      },
+      {
+        "nazev": "150g Krůtí prsa zapečená s herkulesem, vařené brambory",
+        "cena": "159 Kč"
+      }
+    ]
+  }
+]
