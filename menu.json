@@ -1,191 +1,78 @@
 [
   {
     "restaurace": "Korzar",
-    "dostupne": true,
-    "polozky": [
-      {
-        "nazev": "Gulášová s bramborem a majoránkou",
-        "cena": "v ceně"
-      },
-      {
-        "nazev": "Česnekové řízečky z vepřové panenky, bramborový salát",
-        "cena": "189 Kč"
-      },
-      {
-        "nazev": "Sicilské arancini plněné krevetami, parmazán, Yuzu espuma",
-        "cena": "239 Kč"
-      },
-      {
-        "nazev": "Kuřecí bowl, čerstvá zelenina, bramborové klínky, jogurtový dip",
-        "cena": "179 Kč"
-      },
-      {
-        "nazev": "Bezlepkové-Hovězí španělský ptáček, jasmínová rýže, silný výpek",
-        "cena": "219 Kč"
-      },
-      {
-        "nazev": "Steak z vepřové kotlety, slanina, Vídeňská cibulka, Volské oko, Demi glace, hranolky, domácí tatarka",
-        "cena": "199 Kč"
-      }
-    ]
+    "dostupne": false,
+    "duvod": "Menu není dostupné"
   },
   {
     "restaurace": "Pizzerie VIVA",
     "dostupne": true,
-    "den": "pátek",
-    "datum": "28. srpna 2026",
+    "den": "pondělí",
+    "datum": "31. srpna 2026",
     "polozky": [
       {
-        "nazev": "polévka bílá zelná",
+        "nazev": "polévka fazolová se zeleninou",
         "cena": "v ceně"
       },
       {
-        "nazev": "1. smažený karbanátek, staročeské šťouchačky, naše nakládaná zelenina",
-        "cena": "187,-"
-      },
-      {
-        "nazev": "2. zapečená kuřecí prsa, slanina, gouda, zeleninový kuskus, salátek, jogurt",
+        "nazev": "1. smažená tilapie, bramborová kaše, salátek",
         "cena": "192,-"
       },
       {
-        "nazev": "3. spaghetti s omáčkou Bolognese, gran moravia",
-        "cena": "195,-"
-      },
-      {
-        "nazev": "4. foccacia ripiena – mayo, gouda, šunka, rajčata, salát",
-        "cena": "195,-"
-      },
-      {
-        "nazev": "5. švestkové knedlíky s mákem, máslem a cukrem",
+        "nazev": "2. kuřecí roláda, rýže basmati, teplá zelenina",
         "cena": "187,-"
       },
       {
-        "nazev": "6. pečený kozí sýr, listy salátu, hrušky, plátky okurek, naše slaná granola, brusinkový dresink",
-        "cena": "209,-"
+        "nazev": "3. čerstvá pasta – smetana, gorgonzola, kuře, gran moravia",
+        "cena": "195,-"
+      },
+      {
+        "nazev": "4. pizza SALAMI",
+        "cena": "195,-"
+      },
+      {
+        "nazev": "5. smažený květák na zeleninovém salátu, okurkový jogurt s koprem",
+        "cena": "187,-"
+      },
+      {
+        "nazev": "6. salát – listy salátu, cherry rajčata, mozzarella bocconcini s tyrolským špekem, dijon dresink",
+        "cena": "198,-"
       }
     ]
   },
   {
     "restaurace": "SONO Grill & Bar",
-    "dostupne": true,
-    "polozky": [
-      {
-        "nazev": "Hráškový krém, nakládaná šalotka, máta",
-        "cena": "55 Kč"
-      },
-      {
-        "nazev": "KUŘECÍ SWEET AND SOUR, ANANAS, JASMÍNOVÁ RÝŽE, KORIANDR",
-        "cena": "195 Kč"
-      },
-      {
-        "nazev": "VEPŘOVÝ ŘÍZEK, BRAMBOROVÝ SALÁT S MAJONÉZOU, CITRON",
-        "cena": "185 Kč"
-      }
-    ]
+    "dostupne": false,
+    "duvod": "Menu není dostupné"
   },
   {
     "restaurace": "Fresh Menu (Šumavská/Veveří)",
-    "dostupne": true,
-    "polozky": [
-      {
-        "nazev": "Frankfurtská (1,7)",
-        "cena": "v ceně"
-      },
-      {
-        "nazev": "350g Sýrové špecle s osmaženou cibulkou a pažitkou (1,3,7)",
-        "cena": "139 Kč"
-      },
-      {
-        "nazev": "120g Smažený kuřecí řízek, bramborová kaše, obloha (1,3,7,9)",
-        "cena": "139 Kč"
-      },
-      {
-        "nazev": "150g Pečená kotleta na houbách, dušená rýže (1)",
-        "cena": "149 Kč"
-      },
-      {
-        "nazev": "120g Rýžové nudle s hovězím masem na asijský způsob (2,4,6,11,14) BL",
-        "cena": "149 Kč"
-      },
-      {
-        "nazev": "300g Směs list. salátů s kuř. masem, dressing z hrubozrnné hořčice, krutony (1,7,10)",
-        "cena": "149 Kč"
-      }
-    ]
+    "dostupne": false,
+    "duvod": "Menu není dostupné"
   },
   {
     "restaurace": "Plzeňský dvůr",
     "dostupne": true,
     "polozky": [
       {
-        "nazev": "Dršťková polévka",
-        "cena": "v ceně"
-      },
-      {
         "nazev": "150g Filovaná kachní prsa na medu a zázvoru, batátovo-mrkvové pyré",
         "cena": "179 Kč"
-      },
-      {
-        "nazev": "240g Lívanečky s teplým ovocem, zakysaná smetana, skořicový cukr",
-        "cena": "159 Kč"
-      },
-      {
-        "nazev": "150g Steak z vepřové krkovičky, restované fazolky, opékané brambory",
-        "cena": "159 Kč"
       }
     ]
   },
   {
     "restaurace": "U Nemilosrdných Bratří",
-    "dostupne": true,
-    "polozky": [
-      {
-        "nazev": "0,2l Hovězí vývar s játrovými knedlíčky (1,7,9,6)",
-        "cena": "v ceně"
-      },
-      {
-        "nazev": "200g Hovězí líčka na červeném víně, bramborové pyré (1,3,5)",
-        "cena": "199,-"
-      },
-      {
-        "nazev": "150g Buchtičky s vanilkovým krémem (1,2,3,5,7)",
-        "cena": "159,-"
-      },
-      {
-        "nazev": "150g Kuřecí řízek, bramborový salát s majonézou (1,2,3,4,6)",
-        "cena": "189,-"
-      }
-    ]
+    "dostupne": false,
+    "duvod": "Menu není dostupné"
   },
   {
     "restaurace": "U Primů",
     "dostupne": false,
-    "duvod": "Dnešní menu ještě není k dispozici"
+    "duvod": "Menu není dostupné"
   },
   {
     "restaurace": "U Dřeváka Beer&Grill",
-    "dostupne": true,
-    "polozky": [
-      {
-        "nazev": "Gulášová z vepřového masa s klobáskou a bramborem (1,6,9)",
-        "cena": "v ceně"
-      },
-      {
-        "nazev": "Smažený sýr s naší tatarskou omáčkou, vařené brambory s pažitkou (1,3,6,7,9), 100g",
-        "cena": "169"
-      },
-      {
-        "nazev": "Konfitované kachní stehno v tymiánovém sádle, karamelizované červené zelí, houskové knedlíky (1,3,6,7,9,10), 260g",
-        "cena": "209"
-      },
-      {
-        "nazev": "Pulled Pork Quesadilla (Trhané vepřové maso, kukuřiče, cheddar, cherry rajčátka) hranolky, chilli dip (1,6,7,9), 80g",
-        "cena": "179"
-      },
-      {
-        "nazev": "Grilovaný steak z kuřecího prsa marinovaný v bylinkách, restované žampiony, americké brambory a dip (1,3,6,7,9), 140g",
-        "cena": "179"
-      }
-    ]
+    "dostupne": false,
+    "duvod": "Menu není dostupné"
   }
 ]
