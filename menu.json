@@ -1,47 +1,199 @@
 [
   {
     "restaurace": "Korzar",
-    "dostupne": false,
-    "duvod": "Menu není dostupné"
+    "dostupne": true,
+    "polozky": [
+      {
+        "nazev": "Čočková s kapáním",
+        "cena": "v ceně"
+      },
+      {
+        "nazev": "Čerstvé těstoviny-tagliatelle carbonara (žloutek, pancetta, parmazán)",
+        "cena": "189 Kč"
+      },
+      {
+        "nazev": "Bezlepkové-Thajské kuřecí Green curry, čerstvá zelenina, kokosové mléko, jasmínová rýže",
+        "cena": "189 Kč"
+      },
+      {
+        "nazev": "Steak z vepřové kotlety, fazolové lusky obalované ve slanině, grenaille, demi glace",
+        "cena": "189 Kč"
+      },
+      {
+        "nazev": "Hovězí svíčková na smetaně, naše brusinky, terčík, karlovarský knedlík",
+        "cena": "239 Kč"
+      },
+      {
+        "nazev": "Bezlepkové-Kuřecí řízek obalovaný v kukuřičné strouhance, bramborová kaše, šopský salát",
+        "cena": "199 Kč"
+      }
+    ]
   },
   {
     "restaurace": "Pizzerie VIVA",
-    "dostupne": false,
-    "duvod": "Menu není dostupné"
+    "dostupne": true,
+    "den": "pondělí",
+    "datum": "7. září 2026",
+    "polozky": [
+      {
+        "nazev": "polévka bramboračka s houbami",
+        "cena": "v ceně"
+      },
+      {
+        "nazev": "1. smažené kousky kuřecího stehna, tonkatsu omáčka, jasmínová rýže, zelný salát",
+        "cena": "192,-"
+      },
+      {
+        "nazev": "2. masové kuličky s pepřovou omáčkou, šťouchané brambory, hrášek s mátou",
+        "cena": "187,-"
+      },
+      {
+        "nazev": "3. čerstvá pasta – masové ragú, kapusta, tyrolský špek, gran moravia",
+        "cena": "195,-"
+      },
+      {
+        "nazev": "4. pizza – mozzarella, šunka, žampiony, čerstvá rajčata, olivy",
+        "cena": "195,-"
+      },
+      {
+        "nazev": "5. restované zelné listy, cibulová omáčka, slaný sýr, pečená brambora",
+        "cena": "187,-"
+      },
+      {
+        "nazev": "6. listový salát, cherry rajčata, pečené grenaile, trhané kuřecí maso, farmářský dresink",
+        "cena": "v ceně"
+      },
+      {
+        "nazev": "křupavá cibulka",
+        "cena": "198,-"
+      }
+    ]
   },
   {
     "restaurace": "SONO Grill & Bar",
-    "dostupne": false,
-    "duvod": "Menu není dostupné"
+    "dostupne": true,
+    "polozky": [
+      {
+        "nazev": "Rajská polévka, tarhoňa, zakysaná smetana",
+        "cena": "55 Kč"
+      },
+      {
+        "nazev": "SEKANÁ VEPŘOVÁ PEČENĚ, BRAMBOROVÁ KAŠE, SLANINOVÁ ŠŤÁVA, PAŽITKA",
+        "cena": "195 Kč"
+      },
+      {
+        "nazev": "SRBSKÉ RIZOTO, HRÁŠEK, KUKUŘICE, SÝR, ČALAMÁDA",
+        "cena": "175 Kč"
+      },
+      {
+        "nazev": "SMAŽENÝ SÝR, VAŘENÉ BRAMBORY, TATARSKÁ OMÁČKA",
+        "cena": "185 Kč"
+      }
+    ]
   },
   {
     "restaurace": "Fresh Menu (Šumavská/Veveří)",
-    "dostupne": false,
-    "duvod": "Menu není dostupné"
+    "dostupne": true,
+    "polozky": [
+      {
+        "nazev": "Kapustová s bramborem (1)",
+        "cena": "v ceně"
+      },
+      {
+        "nazev": "200g Smažený květák, vařené brambory, domácí tatarská omáčka (1,3,7,10)",
+        "cena": "139 Kč"
+      },
+      {
+        "nazev": "120g Maďarský kuřecí paprikáš, vařené těstoviny (1,3,7)",
+        "cena": "139 Kč"
+      },
+      {
+        "nazev": "150g Pečená vepřová kotleta na dijonské hořčici se slaninou, dušená rýže (10) BL",
+        "cena": "149 Kč"
+      },
+      {
+        "nazev": "150g Kuřecí roláda se sušenými rajčaty, máslový kuskus (1,7)",
+        "cena": "149 Kč"
+      },
+      {
+        "nazev": "300g Grilovaný okoun, listové saláty, citrónový dip, pečivo (1,3,4,6,7,10,11)",
+        "cena": "149 Kč"
+      }
+    ]
   },
   {
     "restaurace": "Plzeňský dvůr",
     "dostupne": true,
     "polozky": [
       {
-        "nazev": "150g Fish and chips",
+        "nazev": "Cibulovo-bazalkový krém",
+        "cena": "v ceně"
+      },
+      {
+        "nazev": "150g Hot-dog s trhanou vepřovou krkovicí, nakládané zelí, čedarová omáčka, BBQ",
         "cena": "179 Kč"
+      },
+      {
+        "nazev": "300g Špagety s masovou směsí, strouhaný sýr",
+        "cena": "159 Kč"
+      },
+      {
+        "nazev": "150g Plněná kuřecí prsa hermelínem a herkulesem, bramborová kaše",
+        "cena": "159 Kč"
       }
     ]
   },
   {
     "restaurace": "U Nemilosrdných Bratří",
-    "dostupne": false,
-    "duvod": "Menu není dostupné"
+    "dostupne": true,
+    "polozky": [
+      {
+        "nazev": "0,2l Rajčatová s mozzarellou",
+        "cena": "v ceně"
+      },
+      {
+        "nazev": "150g Gyros z krkovice, pita chléb, čerstvá zelenina, tzatziki (1,2,3,5)",
+        "cena": "189,-"
+      },
+      {
+        "nazev": "150g Přírodní vepřová kapsa plněná hermelínem a slaninou, šťouchané brambory s cibulkou, slaninová mayo(1,2,4,6,7)",
+        "cena": "199,-"
+      },
+      {
+        "nazev": "150g Kuřecí steak, červená curry omáčka, hranolky (1,2,3,4)",
+        "cena": "189,-"
+      }
+    ]
   },
   {
     "restaurace": "U Primů",
     "dostupne": false,
-    "duvod": "Menu není dostupné"
+    "duvod": "Dnešní menu se nepodařilo přečíst"
   },
   {
     "restaurace": "U Dřeváka Beer&Grill",
-    "dostupne": false,
-    "duvod": "Menu není dostupné"
+    "dostupne": true,
+    "polozky": [
+      {
+        "nazev": "Drůbeží vývar s hráškem a nudlemi (1,6,9)",
+        "cena": "v ceně"
+      },
+      {
+        "nazev": "Smažený kuřecí Cordon bleu s bramborovou kaší a lehkým salátkem (1,3,6,7,9), 120g",
+        "cena": "169"
+      },
+      {
+        "nazev": "Chilli Con Carne s hovězím a vepřovým masem, fazolemi, kukuřicí, zakysanou smetanou a koriandrem, čerstvý chléb z pekařství Křižák (1,3,6,7,9), 70g",
+        "cena": "189"
+      },
+      {
+        "nazev": "Tortilla plněná grilovanými kuřecími prsíčky, cheddarem, rajčátky, salátem a dipem, hranolky s dresinkem (1,3,6,7,9), 80g",
+        "cena": "179"
+      },
+      {
+        "nazev": "Grilované medailonky z vepřové panenky se zelenými fazolkami na slanině, opékané brambory s česnekem a dresink (1,3,6,7,9,10), 140g",
+        "cena": "179"
+      }
+    ]
   }
 ]
