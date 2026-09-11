@@ -22,7 +22,7 @@ except ImportError:
 
 try:
     import pytesseract
-    from PIL import Image
+    from PIL import Image, ImageFilter
 except ImportError:
     print("Chybí závislosti pytesseract/Pillow. Nainstaluj je příkazem:")
     print("  pip install pytesseract pillow")
@@ -177,6 +177,10 @@ PRIMU_POLOZKA_REGEX = re.compile(r"^\s*[1-4][.)]\s*(.+)$")
 # OCR obvykle nepozná dvousloupcový layout obrázku a cenu připojí rovnou
 # za text jídla na stejný řádek (např. "...tatarka (a.1.3.7.10.) 154 ,-").
 PRIMU_CENA_KONEC_REGEX = re.compile(r'(\d{2,4})\s*[\s,.\-;=„"]*$')
+# Od 09/2026 má obrázek menu jiný layout: ceny jsou samostatný blok čísel na
+# konci obrázku (odděleně od názvů jídel), 4 ceny na den, v pořadí dny Po–Pá.
+# Řádek obsahuje jen cenu a interpunkci OCR šumu, žádná písmena.
+PRIMU_SAMOSTATNA_CENA_REGEX = re.compile(r"^(\d{2,4})\s*[\s,.\-=]*$")
 
 
 def _primu_cena_z_radku(text):
@@ -228,7 +232,14 @@ def scrape_u_primu():
 
     try:
         obrazek = Image.open(io.BytesIO(obrazek_response.content))
-        text = pytesseract.image_to_string(obrazek, lang="ces")
+        # Černobílý převod + 2× zvětšení + zaostření výrazně zlepšuje přesnost
+        # OCR (ověřeno na reálném menu) oproti předání barevné fotky přímo.
+        obrazek_ocr = (
+            obrazek.convert("L")
+            .resize((obrazek.width * 2, obrazek.height * 2), Image.LANCZOS)
+            .filter(ImageFilter.SHARPEN)
+        )
+        text = pytesseract.image_to_string(obrazek_ocr, lang="ces")
     except Exception as e:
         print(f"  [{nazev}] OCR se nepodařilo spustit / přečíst: {e}")
         return obrazek_zaznam
@@ -253,14 +264,41 @@ def scrape_u_primu():
 
     polevka_nazev = PRIMU_POLEVKA_REGEX.search(blok[0]).group(1).strip()
 
-    polozky = [{"nazev": polevka_nazev, "cena": "v ceně"}]
+    polozky_s_cenou = []
+    polozky_bez_ceny = []
     for radek in blok[1:]:
         m = PRIMU_POLOZKA_REGEX.match(radek.strip())
         if not m:
             continue
-        jidlo, cena = _primu_cena_z_radku(m.group(1))
+        text_polozky = m.group(1).strip()
+        jidlo, cena = _primu_cena_z_radku(text_polozky)
         if jidlo and cena:
-            polozky.append({"nazev": jidlo, "cena": f"{cena} Kč"})
+            polozky_s_cenou.append({"nazev": jidlo, "cena": f"{cena} Kč"})
+        else:
+            polozky_bez_ceny.append(text_polozky)
+
+    if len(polozky_s_cenou) == 4:
+        # Starý layout — cena byla připojená rovnou za text jídla.
+        polozky = [{"nazev": polevka_nazev, "cena": "v ceně"}] + polozky_s_cenou
+    else:
+        # Nový layout — ceny jsou samostatný blok čísel na konci obrázku.
+        # Bezpečnostní kontrola: pozice podle dne v týdnu je spolehlivá jen
+        # tehdy, když najdeme přesně 4 nečíslované položky pro dnešní den a
+        # přesně 4 ceny na každý z 5 dní (tj. žádný jiný číselný šum v textu).
+        ceny_samostatne = [
+            m.group(1)
+            for r in radky
+            if r.strip() and (m := PRIMU_SAMOSTATNA_CENA_REGEX.match(r.strip()))
+        ]
+        ocekavany_pocet_cen = len(polevka_indexy) * 4
+        if len(polozky_bez_ceny) == 4 and len(ceny_samostatne) == ocekavany_pocet_cen:
+            ceny_pro_den = ceny_samostatne[weekday * 4 : weekday * 4 + 4]
+            polozky = [{"nazev": polevka_nazev, "cena": "v ceně"}] + [
+                {"nazev": jidlo, "cena": f"{cena} Kč"}
+                for jidlo, cena in zip(polozky_bez_ceny, ceny_pro_den)
+            ]
+        else:
+            polozky = [{"nazev": polevka_nazev, "cena": "v ceně"}] + polozky_s_cenou
 
     # Pro dnešní den očekáváme polévku + přesně 4 číslované položky s cenou.
     if len(polozky) != 5:
