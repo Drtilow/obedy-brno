@@ -167,29 +167,8 @@
   },
   {
     "restaurace": "U Primů",
-    "dostupne": true,
-    "polozky": [
-      {
-        "nazev": "Špenátová s bramborem (a.13.7.)",
-        "cena": "v ceně"
-      },
-      {
-        "nazev": "Smažený vepřový řízek, bramborový salát (a.1.3.7.10)",
-        "cena": "154 Kč"
-      },
-      {
-        "nazev": "Slovenské halušky se zelím a uzeným masem (a.1.3.)",
-        "cena": "154 Kč"
-      },
-      {
-        "nazev": "Maďarský vepřový perkelt, těstoviny (houskový knedllík) (a.1.3.7.)",
-        "cena": "159 Kč"
-      },
-      {
-        "nazev": "Hamburger s trhaným vepřovým masem, cibulovým chutney a zeleninou, hranolky, tatarka",
-        "cena": "159 Kč"
-      }
-    ]
+    "dostupne": false,
+    "duvod": "Dnešní menu se nepodařilo přečíst"
   },
   {
     "restaurace": "U Dřeváka Beer&Grill",
