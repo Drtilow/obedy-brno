@@ -71,37 +71,125 @@
   },
   {
     "restaurace": "SONO Grill & Bar",
-    "dostupne": false,
-    "duvod": "Menu není dostupné"
+    "dostupne": true,
+    "polozky": [
+      {
+        "nazev": "Kulajda, houby, kopr",
+        "cena": "55 Kč"
+      },
+      {
+        "nazev": "MASOVÉ KULIČKY, SMETANOVÁ OMÁČKA, BRAMBOROVÁ KAŠE, HRÁŠEK, BRUSINKY",
+        "cena": "185 Kč"
+      },
+      {
+        "nazev": "SMAŽENÝ KUŘECÍ POPCORN, SWEET CHILLI OMÁČKA, JASMÍNOVÁ RÝŽE, KORIANDR",
+        "cena": "195 Kč"
+      }
+    ]
   },
   {
     "restaurace": "Fresh Menu (Šumavská/Veveří)",
-    "dostupne": false,
-    "duvod": "Menu není dostupné"
+    "dostupne": true,
+    "polozky": [
+      {
+        "nazev": "Kulajda (1,3,7)",
+        "cena": "v ceně"
+      },
+      {
+        "nazev": "100g Smažená gouda, vařené brambory, domácí tatarská omáčka (1,3,7,10)",
+        "cena": "139 Kč"
+      },
+      {
+        "nazev": "120g Srbské kuřecí rizoto, strouhaný sýr, okurek (7,9) BL",
+        "cena": "139 Kč"
+      },
+      {
+        "nazev": "150g Vepřová pečeně na kmíně, vařené těstoviny (1,3)",
+        "cena": "149 Kč"
+      },
+      {
+        "nazev": "150g Kuřecí MADRAS, jasmínová rýže, koriandr (-) BL",
+        "cena": "149 Kč"
+      },
+      {
+        "nazev": "350g Pečený hermelín v listovém těstě, brusinkový dip, zelenina (1,3,7,10)",
+        "cena": "149 Kč"
+      }
+    ]
   },
   {
     "restaurace": "Plzeňský dvůr",
     "dostupne": true,
     "polozky": [
       {
-        "nazev": "150g Hot-dog s trhanou vepřovou krkovicí, nakládané zelí, čedarová omáčka, BBQ",
+        "nazev": "Čočková polévka se zeleninou",
+        "cena": "v ceně"
+      },
+      {
+        "nazev": "150g Česnekové řízečky z vepřové panenky, šťouchané brambory",
         "cena": "179 Kč"
+      },
+      {
+        "nazev": "300g Zapečené těstoviny s uzeným masem, zelný salá",
+        "cena": "159 Kč"
+      },
+      {
+        "nazev": "150g Kuřecí gyros s červenou cibulkou, bramborové hranolky",
+        "cena": "159 Kč"
       }
     ]
   },
   {
     "restaurace": "U Nemilosrdných Bratří",
-    "dostupne": false,
-    "duvod": "Menu není dostupné"
+    "dostupne": true,
+    "polozky": [
+      {
+        "nazev": "0,2l Zeleninová polévka",
+        "cena": "v ceně"
+      },
+      {
+        "nazev": "150g Kuřecí plátek zapečený sýrem, hranolky, majonéza (1,2,3,5)",
+        "cena": "189,-"
+      },
+      {
+        "nazev": "150g Hovězí trhané, bramborové pyré(1,2,4,6,7)",
+        "cena": "199,-"
+      },
+      {
+        "nazev": "150g Srbské rizoto, sypané sýrem, okurka (1,2,3,4)",
+        "cena": "189,-"
+      }
+    ]
   },
   {
     "restaurace": "U Primů",
     "dostupne": false,
-    "duvod": "Menu není dostupné"
+    "duvod": "Dnešní menu se nepodařilo přečíst"
   },
   {
     "restaurace": "U Dřeváka Beer&Grill",
-    "dostupne": false,
-    "duvod": "Menu není dostupné"
+    "dostupne": true,
+    "polozky": [
+      {
+        "nazev": "Hovězí vývar s nudlemi a zeleninou (1,3,6,9)",
+        "cena": "v ceně"
+      },
+      {
+        "nazev": "Lasagne Quattro Formaggi (Grilovaná kuřecí prsíčka, sýrová omáčka ze čtyř druhů sýru, bešamel) salátek (1,3,6,7,9), 80g",
+        "cena": "169"
+      },
+      {
+        "nazev": "Hovězí svíčková, redukce z brusinek, citron a houskový knedlík (1, 3, 6, 7, 9) 100g",
+        "cena": "209"
+      },
+      {
+        "nazev": "Chicken & Cheese Wrap (Grilované kuřecí prsíčka, cheddar, slanina, ledový salát, limetková mayo) hranolky a dresink (1,3,6,7,9), 80g",
+        "cena": "179"
+      },
+      {
+        "nazev": "Grilovaná vepřová kotleta s krémovou žampionovou omáčkou a pečené slaninové brambory, salátek (1,6,7,9,10), 140g",
+        "cena": "179"
+      }
+    ]
   }
 ]
