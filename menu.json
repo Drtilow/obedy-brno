@@ -167,8 +167,29 @@
   },
   {
     "restaurace": "U Primů",
-    "dostupne": false,
-    "duvod": "Dnešní menu se nepodařilo přečíst"
+    "dostupne": true,
+    "polozky": [
+      {
+        "nazev": "Krupicová s vejcem (a.9.)",
+        "cena": "v ceně"
+      },
+      {
+        "nazev": "Debrecinský vepřový guláš, houskový knedllík (a.1.3.7.)",
+        "cena": "154 Kč"
+      },
+      {
+        "nazev": "Smažená kuřecí kapsa s česnekem a nivou, šťouchané brambory, okurek",
+        "cena": "154 Kč"
+      },
+      {
+        "nazev": "Španělský hovězí ptáček, dušená rýže (a.1.3.7.10)",
+        "cena": "159 Kč"
+      },
+      {
+        "nazev": "Grilované vepřové medailonky se slaninou a sazeným vejcem, hranolky, tatarka (a.1.3.7.)",
+        "cena": "159 Kč"
+      }
+    ]
   },
   {
     "restaurace": "U Dřeváka Beer&Grill",

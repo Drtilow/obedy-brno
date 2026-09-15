@@ -177,21 +177,59 @@ PRIMU_POLOZKA_REGEX = re.compile(r"^\s*[1-4][.)]\s*(.+)$")
 # OCR obvykle nepozná dvousloupcový layout obrázku a cenu připojí rovnou
 # za text jídla na stejný řádek (např. "...tatarka (a.1.3.7.10.) 154 ,-").
 PRIMU_CENA_KONEC_REGEX = re.compile(r'(\d{2,4})\s*[\s,.\-;=„"]*$')
-# Od 09/2026 má obrázek menu jiný layout: ceny jsou samostatný blok čísel na
-# konci obrázku (odděleně od názvů jídel), 4 ceny na den, v pořadí dny Po–Pá.
-# Řádek obsahuje jen cenu a interpunkci OCR šumu, žádná písmena.
-PRIMU_SAMOSTATNA_CENA_REGEX = re.compile(r"^(\d{2,4})\s*[\s,.\-=]*$")
+# Řádek, který obsahuje jen samotnou cenu a interpunkci OCR šumu (nový layout,
+# viz _primu_radky_s_pozici níže) — bez písmen, jen číslo + ",-" apod.
+PRIMU_CENA_TOKEN_REGEX = re.compile(r'^(\d{2,4})\s*[\s,.\-„"=]*$')
 
 
-def _primu_cena_z_radku(text):
-    """Rozdělí text položky na (název, cena) podle ceny na konci řádku."""
+def _primu_radky_s_pozici(obrazek_ocr):
+    """OCR obrázku, ale místo prostého textu vrátí řádky i s jejich pozicí (Y-souřadnicí).
+
+    Menu má dvousloupcový layout — název jídla vlevo, cena vpravo na stejné výšce.
+    Tesseract ale při čtení textu ("image_to_string") čte sloupce jako samostatné
+    bloky, takže se ceny v textu objeví daleko od svých jídel a i pořadí dnů se
+    může popřehazovat podle libovolných detailů layoutu (párování podle pořadí
+    v textu se muselo opravovat už 3×, pokaždé se to znovu rozbilo). Skutečná
+    pozice na obrázku je na pořadí čtení nezávislá, proto párujeme podle ní.
+    """
+    data = pytesseract.image_to_data(obrazek_ocr, lang="ces", output_type=pytesseract.Output.DICT)
+    seskupene = {}
+    for i in range(len(data["text"])):
+        text = data["text"][i].strip()
+        if not text:
+            continue
+        klic = (data["block_num"][i], data["par_num"][i], data["line_num"][i])
+        top, left = data["top"][i], data["left"][i]
+        polozka = seskupene.setdefault(klic, {"slova": [], "top": top, "bottom": top + data["height"][i]})
+        polozka["slova"].append((left, text))
+        polozka["top"] = min(polozka["top"], top)
+        polozka["bottom"] = max(polozka["bottom"], top + data["height"][i])
+
+    radky = [
+        {"text": " ".join(t for _, t in sorted(p["slova"])), "top": p["top"], "bottom": p["bottom"]}
+        for p in seskupene.values()
+    ]
+    radky.sort(key=lambda r: r["top"])
+    return radky
+
+
+def _primu_spar_cenu(text, top, bottom, ceny_radky):
+    """Vrátí (název, cena) pro řádek položky, nebo (None, None) když se cenu nepodařilo spárovat."""
     m = PRIMU_CENA_KONEC_REGEX.search(text)
-    if not m:
+    if m:
+        nazev = text[: m.start()].strip().rstrip(",.-–;„\" ").strip()
+        if nazev:
+            return nazev, m.group(1)
+
+    # Cena není přímo v textu (nový layout) — najdeme cenový řádek ve stejné
+    # výšce na obrázku (v rámci tolerance na drobné OCR nepřesnosti).
+    if not ceny_radky:
         return None, None
-    nazev = text[: m.start()].strip().rstrip(",.-–;„\" ").strip()
-    if not nazev:
+    stred = (top + bottom) / 2
+    nejblizsi = min(ceny_radky, key=lambda c: abs((c["top"] + c["bottom"]) / 2 - stred))
+    if abs((nejblizsi["top"] + nejblizsi["bottom"]) / 2 - stred) > 60:
         return None, None
-    return nazev, m.group(1)
+    return text, nejblizsi["cena"]
 
 
 def scrape_u_primu():
@@ -239,74 +277,52 @@ def scrape_u_primu():
             .resize((obrazek.width * 2, obrazek.height * 2), Image.LANCZOS)
             .filter(ImageFilter.SHARPEN)
         )
-        text = pytesseract.image_to_string(obrazek_ocr, lang="ces")
+        radky = _primu_radky_s_pozici(obrazek_ocr)
     except Exception as e:
         print(f"  [{nazev}] OCR se nepodařilo spustit / přečíst: {e}")
         return obrazek_zaznam
 
-    radky = text.splitlines()
+    # Bezpečnostní kontrola: index podle dne v týdnu je spolehlivý jen tehdy,
+    # když OCR najde přesně 5 "Polévka" (5 dní).
+    polevky = [r for r in radky if PRIMU_POLEVKA_REGEX.search(r["text"])]
 
-    # Bezpečnostní kontrola: párování podle pořadí je spolehlivé jen tehdy, když
-    # OCR najde přesně 5 "Polévka" (5 dní) — jinak by index podle dne v týdnu
-    # mohl ukázat na špatný blok textu.
-    polevka_indexy = [i for i, r in enumerate(radky) if PRIMU_POLEVKA_REGEX.search(r)]
-
-    if len(polevka_indexy) != 5:
+    if len(polevky) != 5:
         print(
             f"  [{nazev}] OCR rozpoznávání není spolehlivé, nenalezeno přesně 5 "
-            f"řádků s polévkou (nalezeno {len(polevka_indexy)})."
+            f"řádků s polévkou (nalezeno {len(polevky)})."
         )
         return nedostupne(nazev, "Dnešní menu ještě není k dispozici")
 
-    blok_start = polevka_indexy[weekday]
-    blok_konec = polevka_indexy[weekday + 1] if weekday + 1 < len(polevka_indexy) else len(radky)
-    blok = radky[blok_start:blok_konec]
+    dnesni_polevka = polevky[weekday]
+    dalsi_top = polevky[weekday + 1]["top"] if weekday + 1 < len(polevky) else float("inf")
+    polevka_nazev = PRIMU_POLEVKA_REGEX.search(dnesni_polevka["text"]).group(1).strip()
 
-    polevka_nazev = PRIMU_POLEVKA_REGEX.search(blok[0]).group(1).strip()
+    # Blok dnešního dne = vše mezi dnešní a další "Polévkou" podle skutečné
+    # pozice na obrázku (ne podle pořadí v OCR textu).
+    blok = [r for r in radky if dnesni_polevka["top"] < r["top"] < dalsi_top]
 
-    polozky_s_cenou = []
-    polozky_bez_ceny = []
-    for radek in blok[1:]:
-        m = PRIMU_POLOZKA_REGEX.match(radek.strip())
-        if not m:
-            continue
-        text_polozky = m.group(1).strip()
-        jidlo, cena = _primu_cena_z_radku(text_polozky)
-        if jidlo and cena:
-            polozky_s_cenou.append({"nazev": jidlo, "cena": f"{cena} Kč"})
-        else:
-            polozky_bez_ceny.append(text_polozky)
-
-    if len(polozky_s_cenou) == 4:
-        # Starý layout — cena byla připojená rovnou za text jídla.
-        polozky = [{"nazev": polevka_nazev, "cena": "v ceně"}] + polozky_s_cenou
-    else:
-        # Nový layout — ceny jsou samostatný blok čísel na konci obrázku.
-        # Bezpečnostní kontrola: pozice podle dne v týdnu je spolehlivá jen
-        # tehdy, když najdeme přesně 4 nečíslované položky pro dnešní den a
-        # přesně 4 ceny na každý z 5 dní (tj. žádný jiný číselný šum v textu).
-        ceny_samostatne = [
-            m.group(1)
-            for r in radky
-            if r.strip() and (m := PRIMU_SAMOSTATNA_CENA_REGEX.match(r.strip()))
-        ]
-        ocekavany_pocet_cen = len(polevka_indexy) * 4
-        if len(polozky_bez_ceny) == 4 and len(ceny_samostatne) == ocekavany_pocet_cen:
-            ceny_pro_den = ceny_samostatne[weekday * 4 : weekday * 4 + 4]
-            polozky = [{"nazev": polevka_nazev, "cena": "v ceně"}] + [
-                {"nazev": jidlo, "cena": f"{cena} Kč"}
-                for jidlo, cena in zip(polozky_bez_ceny, ceny_pro_den)
-            ]
-        else:
-            polozky = [{"nazev": polevka_nazev, "cena": "v ceně"}] + polozky_s_cenou
-
-    # Pro dnešní den očekáváme polévku + přesně 4 číslované položky s cenou.
-    if len(polozky) != 5:
+    polozky_radky = [r for r in blok if PRIMU_POLOZKA_REGEX.match(r["text"])]
+    if len(polozky_radky) != 4:
         print(
             f"  [{nazev}] OCR rozpoznávání není spolehlivé, pro dnešní den nalezeno "
-            f"{len(polozky) - 1}/4 položek s cenou."
+            f"{len(polozky_radky)}/4 číslovaných položek."
         )
         return nedostupne(nazev, "Dnešní menu se nepodařilo přečíst")
+
+    ceny_radky = []
+    for r in blok:
+        m = PRIMU_CENA_TOKEN_REGEX.match(r["text"])
+        if m:
+            ceny_radky.append({"cena": m.group(1), "top": r["top"], "bottom": r["bottom"]})
+
+    polozky = [{"nazev": polevka_nazev, "cena": "v ceně"}]
+    for r in polozky_radky:
+        text_polozky = PRIMU_POLOZKA_REGEX.match(r["text"]).group(1).strip()
+        jidlo, cena = _primu_spar_cenu(text_polozky, r["top"], r["bottom"], ceny_radky)
+        if not jidlo or not cena:
+            print(f"  [{nazev}] Cenu se nepodařilo spárovat s položkou: {text_polozky!r}")
+            return nedostupne(nazev, "Dnešní menu se nepodařilo přečíst")
+        polozky.append({"nazev": jidlo, "cena": f"{cena} Kč"})
 
     return {"restaurace": nazev, "dostupne": True, "polozky": polozky}
 
