@@ -1,8 +1,33 @@
 [
   {
     "restaurace": "Korzar",
-    "dostupne": false,
-    "duvod": "Menu není dostupné"
+    "dostupne": true,
+    "polozky": [
+      {
+        "nazev": "Čočková s uzeninou",
+        "cena": "v ceně"
+      },
+      {
+        "nazev": "Hovězí smash burger, slanina, čedar, pickles, hranolky",
+        "cena": "219 Kč"
+      },
+      {
+        "nazev": "Kuřecí prsa špikovaná sušenými rajčaty, bylinková omáčka, zeleninový kuskus",
+        "cena": "179 Kč"
+      },
+      {
+        "nazev": "Kuřecí Cordon Bleu (plněný ementálem a šunkou od kosti), bramborová kaše, okurkový salát",
+        "cena": "199 Kč"
+      },
+      {
+        "nazev": "Bezlepkové-koprová omáčka,trhané hovězí přední, vařené vejce, zámecké brambory, libečkový olej",
+        "cena": "199 Kč"
+      },
+      {
+        "nazev": "Kuřecí řízek smažený na přepuštěném másle, vídeňský salát, směs salátů v jogurtovém dresinku, brusinky",
+        "cena": "219 Kč"
+      }
+    ]
   },
   {
     "restaurace": "Pizzerie VIVA",
