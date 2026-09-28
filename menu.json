@@ -41,16 +41,53 @@
   },
   {
     "restaurace": "Fresh Menu (Šumavská/Veveří)",
-    "dostupne": false,
-    "duvod": "Menu není dostupné"
+    "dostupne": true,
+    "polozky": [
+      {
+        "nazev": "Brokolicová (1,7)",
+        "cena": "v ceně"
+      },
+      {
+        "nazev": "150g Smažené žampiony, vařené brambory, domácí tatarská omáčka (1,3,7,10)",
+        "cena": "139 Kč"
+      },
+      {
+        "nazev": "320g Hrachová kaše s opečenou klobásou, chléb, okurek (1)",
+        "cena": "139 Kč"
+      },
+      {
+        "nazev": "150g Vepřová pečeně po cikánsku, dušená rýže (-) BL",
+        "cena": "149 Kč"
+      },
+      {
+        "nazev": "150g Kuřecí steak s houbovým ragú, bramborové gnocchi (1,3,7)",
+        "cena": "149 Kč"
+      },
+      {
+        "nazev": "350g Těstovinový salát s hlívou ústřičnou a vepřovým masem, zelenina (1,3,10)",
+        "cena": "149 Kč"
+      }
+    ]
   },
   {
     "restaurace": "Plzeňský dvůr",
     "dostupne": true,
     "polozky": [
       {
-        "nazev": "150g Sandwich s anglickým roastbeefem, kaparová omáčka",
+        "nazev": "Polévka dle denní nabídky",
+        "cena": "v ceně"
+      },
+      {
+        "nazev": "200g Pečený vepřový bůček na česneku, dušené červené zelí, bramborový nok",
         "cena": "179 Kč"
+      },
+      {
+        "nazev": "STATNÍ SVÁTEK",
+        "cena": "159 Kč"
+      },
+      {
+        "nazev": "STATNÍ SVÁTEK",
+        "cena": "159 Kč"
       }
     ]
   },
@@ -61,8 +98,29 @@
   },
   {
     "restaurace": "U Primů",
-    "dostupne": false,
-    "duvod": "Menu není dostupné"
+    "dostupne": true,
+    "polozky": [
+      {
+        "nazev": "Česneková se sýrovým toustem",
+        "cena": "v ceně"
+      },
+      {
+        "nazev": "Smažené kuřecí stripsy, vařený brambor, tatarka (a.1.3.7.10.)",
+        "cena": "209 Kč"
+      },
+      {
+        "nazev": "Králičí stehno na smetaně, houskový knedlík (a.1.3.7.)",
+        "cena": "209 Kč"
+      },
+      {
+        "nazev": "Grilovaný vepřový steak s máslovou kukuřicí, bramborové krokety, tatarka (a.1.3.7.10.)",
+        "cena": "209 Kč"
+      },
+      {
+        "nazev": "Smažené česnekové řízečky, bramborový salát s majonézou (a.1.3.7",
+        "cena": "10 Kč"
+      }
+    ]
   },
   {
     "restaurace": "U Dřeváka Beer&Grill",
