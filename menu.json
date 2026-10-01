@@ -4,20 +4,20 @@
     "dostupne": true,
     "polozky": [
       {
-        "nazev": "Kuřecí vývar s masem a nudlemi",
+        "nazev": "Hovězí vývar s játrovými knedlíčky",
         "cena": "v ceně"
       },
       {
-        "nazev": "Hovězí wagyu mleté na špejli s bylinkami, omáčka z pečených paprik, špecle, bylinky",
-        "cena": "259 Kč"
+        "nazev": "Vepřový gyros, hranolky, pita chléb, tzatziki, červená cibule",
+        "cena": "179 Kč"
       },
       {
-        "nazev": "Bezlepkové-Kuřecí prso s broskví gratinovaný mozzarellou, hranolky, silný výpek, salát z dubáku",
+        "nazev": "Pečené hovězí mezižebří v BBQ marinádě, bramborová kaše, pickles",
         "cena": "189 Kč"
       },
       {
-        "nazev": "Vepřové výpečky, smetanový špenát, Vídeňská cibulka, bramborový knedlík",
-        "cena": "179 Kč"
+        "nazev": "Čerstvé těstoviny-tagliatelle, gorgonzolová omáčka, kuřecí prso, vlašské ořechy",
+        "cena": "199 Kč"
       },
       {
         "nazev": "Bezlepkové-koprová omáčka,trhané hovězí přední, vařené vejce, zámecké brambory, libečkový olej",
@@ -32,87 +32,66 @@
   {
     "restaurace": "Pizzerie VIVA",
     "dostupne": true,
-    "den": "středa",
-    "datum": "30. září 2026",
+    "den": "čtvrtek",
+    "datum": "1. října 2026",
     "polozky": [
       {
-        "nazev": "polévka dýňová, semínka",
+        "nazev": "polévka hovězí vývar se zeleninou a smaženým hráškem",
         "cena": "v ceně"
       },
       {
-        "nazev": "1. hovězí nudličky na zeleném pepři, sázené vejce, dušená rýže",
+        "nazev": "1. svíčková na smetaně, karlovarský knedlík, šlehaná smetana, brusinky",
+        "cena": "205,-"
+      },
+      {
+        "nazev": "2. živáňská na špízu – panenka, kuře, slanina, klobása, hranolky, naše tatarka",
         "cena": "195,-"
       },
       {
-        "nazev": "2. masové kuličky s hořčicovou omáčkou, šťouchané brambory, brusinky",
-        "cena": "187,-"
-      },
-      {
-        "nazev": "3. risotto – dýně, slávky, sušená rajčata, víno, kerblík",
+        "nazev": "3. čerstvá pasta – smetana, kuře, cukrový hrášek, gran moravia",
         "cena": "195,-"
       },
       {
-        "nazev": "4. pizza – mozzarella, čerstvá rajčata, šunka, rukola",
-        "cena": "195,-"
+        "nazev": "4. naše PIADINA CAPRESE – extra virgin, rajče, mozzarella bocconocini, prosciutto crudo, bazalka, balsamico",
+        "cena": "198,-"
       },
       {
-        "nazev": "5. čočkový dhál – pečená zelenina, naan placka se sezamem",
-        "cena": "187,-"
+        "nazev": "5. smažený hermelín, vařený brambor, mayo, salátek",
+        "cena": "198,-"
       },
       {
         "nazev": "6. CAESAR salát s krevetami",
         "cena": "219,-"
-      },
-      {
-        "nazev": "7. ZVĚŘINA – gulášek z jelena, cibulka, iberico, majoránka, bramboráčky",
-        "cena": "225,-"
       }
     ]
   },
   {
     "restaurace": "SONO Grill & Bar",
-    "dostupne": true,
-    "polozky": [
-      {
-        "nazev": "ČOČKOVÁ POLÉVKA, UZENINA, KOŘENOVÁ ZELENINA",
-        "cena": "55 Kč"
-      },
-      {
-        "nazev": "VEPŘOVÉ VÝPEČKY, KYSANÉ ZELÍ, BRAMBOROVÝ KNEDLÍK",
-        "cena": "195 Kč"
-      },
-      {
-        "nazev": "GERMKNODEL, POVIDLA, VANILKOVÁ OMÁČKA, MÁK",
-        "cena": "185 Kč"
-      },
-      {
-        "nazev": "SMAŽENÉ ŽAMPIONY, VAŘENÉ BRAMBORY, TATARSKÁ OMÁČKA",
-        "cena": "175 Kč"
-      }
-    ]
+    "dostupne": false,
+    "duvod": "Menu není dostupné"
   },
   {
     "restaurace": "Fresh Menu (Šumavská/Veveří)",
     "dostupne": true,
     "polozky": [
       {
-        "nazev": "Hrachová s uzeninou (1)",
+        "nazev": "Jarní zeleninová (3,9)",
         "cena": "v ceně"
       },
       {
-        "nazev": "350g Houbové rizoto se smetanou a parmazánem, listové saláty (7) BL",
+        "nazev": "350g Kynuté knedlíky s meruňkami sypané praženou strouhankou, máslo (1,3,7)",
         "cena": "139 Kč"
       },
       {
-        "nazev": "120g Hamburská vepřová pečeně, houskové knedlíky (1,3,7,9,10)",
+        "nazev": "150g Smažený karbanátek, vařené brambory, okurek (1,3,7)",
         "cena": "139 Kč"
       },
       {
-        "nazev": "150g Kuř. prsíčko zapečené rajčaty a mozzarellou, vařené brambory s pažitkou (7) BL",
+        "nazev": "150g Indické butter chicken, rýže basmati, koriandr (6,7) BL",
         "cena": "149 Kč"
       },
       {
-        "nazev": "120g Rýžové nudle s hovězím masem na chilli a zázvoru (6) BL",
+        "nazev": "150g Vepřová roláda plněná špenátem a vejci, zeleninový bulgur (1,3,7,9)",
         "cena": "149 Kč"
       },
       {
@@ -126,7 +105,7 @@
     "dostupne": true,
     "polozky": [
       {
-        "nazev": "Hovězí vývar s fritátovými nudlemi",
+        "nazev": "Krémová česneková polévka s uzenou krkovičkou",
         "cena": "v ceně"
       },
       {
@@ -134,11 +113,11 @@
         "cena": "179 Kč"
       },
       {
-        "nazev": "150g Vepřová srdíčka na smetaně, houskové knedlíky",
+        "nazev": "200g Jitrnicový a jelítkový prejt, sudové zelí, vařené brambory",
         "cena": "159 Kč"
       },
       {
-        "nazev": "150g Hovězí azu po tatarsku, dušená rýže",
+        "nazev": "350g Kuřecí křídla BBQ, nakládaná zelenina, chléb",
         "cena": "159 Kč"
       }
     ]
@@ -148,15 +127,15 @@
     "dostupne": true,
     "polozky": [
       {
-        "nazev": "0,2l Frankfurtská polévka (9,1,3,6,7)",
+        "nazev": "0,2l Drůbeží vývar (1,7,9,6)",
         "cena": "v ceně"
       },
       {
-        "nazev": "150g Medailonky z panenky, opékané brambory, sýrová omáčka (1,3,6,5)",
-        "cena": "199,-"
+        "nazev": "150g Kuřecí prso v bramboráku, salátek (1,2,4,7,8)",
+        "cena": "189,-"
       },
       {
-        "nazev": "150g Halušky, červené zelí, uzené maso (1,2,3,5,7)",
+        "nazev": "150g Segedínský guláš, kynutý knedlík (1,2,3,5,7)",
         "cena": "189,-"
       },
       {
@@ -167,52 +146,31 @@
   },
   {
     "restaurace": "U Primů",
-    "dostupne": true,
-    "polozky": [
-      {
-        "nazev": "Fazolová s párkem (a.1.)",
-        "cena": "v ceně"
-      },
-      {
-        "nazev": "Smažený karbenátek, bramborová kaše, okurek (a.1.3.7.)",
-        "cena": "154 Kč"
-      },
-      {
-        "nazev": "Pečené vepřové koleno na pivě, bramborová kaše, okurek (a.1.7.)",
-        "cena": "154 Kč"
-      },
-      {
-        "nazev": "Kuřecí kung - pao, dušená rýže (a.3.5.6.)",
-        "cena": "159 Kč"
-      },
-      {
-        "nazev": "Pikantní vepřový flamendr v bramboráku, zelný salát (a.1.3.7.)",
-        "cena": "159 Kč"
-      }
-    ]
+    "dostupne": false,
+    "duvod": "Dnešní menu se nepodařilo přečíst"
   },
   {
     "restaurace": "U Dřeváka Beer&Grill",
     "dostupne": true,
     "polozky": [
       {
-        "nazev": "Fazolová s uzeninou (1,6,7,9)",
+        "nazev": "Hovězí vývar s masem, zeleninou a nudlemi (1,3,6,7,9)",
         "cena": "v ceně"
       },
       {
-        "nazev": "Naše sekaná s anglickou slaninou, bramborovou kaší a kyselou okurkou (1,3,6,7,9), 130g",
+        "nazev": "Smažené kuřecí řízečky, vařené brambory s máslem, petrželkou a citronem (1,3,6,7,9), 150g",
         "cena": "174"
       },
       {
-        "nazev": "Maďarský hovězí guláš, houskové knedlíky, červená cibulka (1,3,6,7,9), 100g",
-        "cena": "214"
-      },
-      {
-        "nazev": "Kuřecí Fajitas Wrap (marinovaná kuřecí prsíčka, gouda, nakládaná cibulka, grilovaná paprika, chimmichurri majonéza) hranolky, dip (1,3,6,7,9), 80g",
+        "nazev": "Řecká Musaka s mletým masem a míchaným salátkem (1,3,7), 80g",
         "cena": "184"
       },
       {
-        "nazev": "Gratinovaný kuřecí steak s rajčaty zapečený mozzarellou, grilovaná zelenina, opékané brambory, jogurtový dresink (6,7,9), 140g",
+        "nazev": "Red Onion Burger (Grilovaná slanina, nakládaná červená cibulka a okurky, salát, The Burger Maker® majonéza) hranolky, dip (1,3,6,7,9,10), 80g",
+        "cena": "214"
+      },
+      {
+        "nazev": "Marinovaná vepřová kotletka v bylinkách a česneku, grilované žampiony, tymiánová demi glace, americké brambory a jogurtový dip (1,6,7,9), 140g",
         "cena": "184"
       }
     ]
