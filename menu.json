@@ -1,8 +1,33 @@
 [
   {
     "restaurace": "Korzar",
-    "dostupne": false,
-    "duvod": "Menu není dostupné"
+    "dostupne": true,
+    "polozky": [
+      {
+        "nazev": "Zeleninový krém, krutony",
+        "cena": "v ceně"
+      },
+      {
+        "nazev": "Lasagne bolognese, milanská omáčka, bazalka",
+        "cena": "199 Kč"
+      },
+      {
+        "nazev": "Kuřecí kousky v teriyaki omáčce s čerstvou zeleninou, jasmínová rýže",
+        "cena": "189 Kč"
+      },
+      {
+        "nazev": "Steak z vepřové kotlety, slanina, Vídeňská cibulka, Volské oko, Demi glace, hranolky, domácí tatarka",
+        "cena": "199 Kč"
+      },
+      {
+        "nazev": "Smažená gouda na přepuštěném másle, vařený brambor s máslem a petrželí, domácí tatarka",
+        "cena": "219 Kč"
+      },
+      {
+        "nazev": "Bezlepkové-Hovězí znojemská pečeně, jasmínová rýže",
+        "cena": "199 Kč"
+      }
+    ]
   },
   {
     "restaurace": "Pizzerie VIVA",
