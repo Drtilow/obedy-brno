@@ -31,8 +31,39 @@
   },
   {
     "restaurace": "Pizzerie VIVA",
-    "dostupne": false,
-    "duvod": "Menu není dostupné"
+    "dostupne": true,
+    "den": "pondělí",
+    "datum": "5. října 2026",
+    "polozky": [
+      {
+        "nazev": "polévka fazolová s mrkví",
+        "cena": "v ceně"
+      },
+      {
+        "nazev": "1. gratinovaná treska, rajče, bazalka, bramborová kaše s wasabi, salátek",
+        "cena": "192,-"
+      },
+      {
+        "nazev": "2. kuřecí KUNG-PAO, rýže basmati",
+        "cena": "187,-"
+      },
+      {
+        "nazev": "3. čerstvá pasta – dýňová omáčka, kuře, pražená semínka, slaninový chips",
+        "cena": "195,-"
+      },
+      {
+        "nazev": "4. pizza – sugo, mozzarella, slanina, kukuřice, feferonky",
+        "cena": "195,-"
+      },
+      {
+        "nazev": "5. maďarské lečo, sázené vejce, náš sýrový chléb",
+        "cena": "187,-"
+      },
+      {
+        "nazev": "6. listový salát, rajčata, okurek, buratta, pečená slanina, hořčičný dresink",
+        "cena": "215,-"
+      }
+    ]
   },
   {
     "restaurace": "SONO Grill & Bar",
@@ -41,32 +72,103 @@
   },
   {
     "restaurace": "Fresh Menu (Šumavská/Veveří)",
-    "dostupne": false,
-    "duvod": "Menu není dostupné"
+    "dostupne": true,
+    "polozky": [
+      {
+        "nazev": "Pórková s bramborem (1,3,7)",
+        "cena": "v ceně"
+      },
+      {
+        "nazev": "200g Smažený květák, vařené brambory, domácí tatarská omáčka (1,3,7,10)",
+        "cena": "139 Kč"
+      },
+      {
+        "nazev": "120g Špagety s kuřecím masem a rajčaty, strouhaný sýr (1,3,7)",
+        "cena": "139 Kč"
+      },
+      {
+        "nazev": "150g Vepřová plec na slanině a dijonské hořčici, dušená rýže (10) BL",
+        "cena": "149 Kč"
+      },
+      {
+        "nazev": "150g Kuřecí prsíčko na zelenině, máslový kuskus (1,7,9)",
+        "cena": "149 Kč"
+      },
+      {
+        "nazev": "300g Směs list. salátů s kuř. medailonky, dress. z hrubozr. hořčice, pečivo (1,3,6,7,10,11)",
+        "cena": "149 Kč"
+      }
+    ]
   },
   {
     "restaurace": "Plzeňský dvůr",
     "dostupne": true,
     "polozky": [
       {
-        "nazev": "200g Pečený vepřový bůček na česneku, dušené červené zelí, bramborový nok",
+        "nazev": "Kmínová polévka",
+        "cena": "v ceně"
+      },
+      {
+        "nazev": "150g Krůtí medailonky s brusinkovou omáčkou, bramborové dukáty",
         "cena": "179 Kč"
+      },
+      {
+        "nazev": "300g Fazolky na kyselo, vařené vejce, vařené brambory",
+        "cena": "159 Kč"
+      },
+      {
+        "nazev": "150g Vepřové maso na čínský způsob, bramborové hranolky",
+        "cena": "159 Kč"
       }
     ]
   },
   {
     "restaurace": "U Nemilosrdných Bratří",
-    "dostupne": false,
-    "duvod": "Menu není dostupné"
+    "dostupne": true,
+    "polozky": [
+      {
+        "nazev": "0,2 l Tradiční moravská česnečka s bramborem a strouhaným sýrem 150 g Pečená jitrnice, vařené brambory s máslem, kysané zelí",
+        "cena": "179,-"
+      },
+      {
+        "nazev": "150 g Máslová dýně na žlutém kari s kuřecími kousky a rýží basmati",
+        "cena": "189,-"
+      },
+      {
+        "nazev": "150 g Maďarský guláš s kozími rohy a pečivem",
+        "cena": "189,-"
+      }
+    ]
   },
   {
     "restaurace": "U Primů",
     "dostupne": false,
-    "duvod": "Menu není dostupné"
+    "duvod": "Dnešní menu se nepodařilo přečíst"
   },
   {
     "restaurace": "U Dřeváka Beer&Grill",
-    "dostupne": false,
-    "duvod": "Menu není dostupné"
+    "dostupne": true,
+    "polozky": [
+      {
+        "nazev": "Drůbeží vývar s hráškem a nudlemi (1,6,9)",
+        "cena": "v ceně"
+      },
+      {
+        "nazev": "Smažený kuřecí Cordon bleu s bramborovou kaší a lehkým salátkem (1,3,6,7,9), 120g",
+        "cena": "174"
+      },
+      {
+        "nazev": "Chilli Con Carne s hovězím a vepřovým masem, fazolemi, kukuřicí, zakysanou smetanou a koriandrem, čerstvý chléb z pekařství Křižák (1,3,6,7,9), 70g",
+        "cena": "214"
+      },
+      {
+        "nazev": "Tortilla plněná grilovanými kuřecími prsíčky, cheddarem, rajčátky, salátem a dipem, hranolky s dresinkem (1,3,6,7,9), 80g",
+        "cena": "184"
+      },
+      {
+        "nazev": "Grilované medailonky z vepřové panenky se zelenými fazolkami na slanině, opékané brambory s česnekem a dresink (1,3,6,7,9,10), 140g",
+        "cena": "184"
+      }
+    ]
   }
 ]
