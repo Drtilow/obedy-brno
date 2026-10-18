@@ -1,8 +1,37 @@
 [
   {
     "restaurace": "Korzar",
-    "dostupne": false,
-    "duvod": "Menu není dostupné"
+    "dostupne": true,
+    "polozky": [
+      {
+        "nazev": "Šumavská bramboračka",
+        "cena": "v ceně"
+      },
+      {
+        "nazev": "Qurrito, kuřecí maso, směs sýrů, guacamole, zakysaná smetana, hranolky",
+        "cena": "199 Kč"
+      },
+      {
+        "nazev": "Čerstvé těstoviny-rigatoni, salcicca, smetana, šafrán, tymián, parmazán",
+        "cena": "199 Kč"
+      },
+      {
+        "nazev": "Bezlepkové-hovězí krk pečený na kořenové zelenina, dýňové pyré",
+        "cena": "199 Kč"
+      },
+      {
+        "nazev": "Hovězí svíčková na smetaně, naše brusinky, terčík, karlovarský knedlík",
+        "cena": "239 Kč"
+      },
+      {
+        "nazev": "Bezlepkové-Italské risotto, lískové oříšky, lišky, stracciatlla",
+        "cena": "199 Kč"
+      },
+      {
+        "nazev": "Bezlepkové-Italské risotto, lískové oříšky, lišky, kuřecí prso",
+        "cena": "199 Kč"
+      }
+    ]
   },
   {
     "restaurace": "Pizzerie VIVA",
