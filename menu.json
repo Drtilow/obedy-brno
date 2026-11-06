@@ -145,8 +145,21 @@
   },
   {
     "restaurace": "U Nemilosrdných Bratří",
-    "dostupne": false,
-    "duvod": "Menu není dostupné"
+    "dostupne": true,
+    "polozky": [
+      {
+        "nazev": "0,2 l Gulášová polévka",
+        "cena": "v ceně"
+      },
+      {
+        "nazev": "150 g Wrap, stripsy, slaninová mayo, steakové hranolky",
+        "cena": "220,-"
+      },
+      {
+        "nazev": "200 g Kuřecí řízečky s bramborovým salátem",
+        "cena": "199,-"
+      }
+    ]
   },
   {
     "restaurace": "U Primů",
