@@ -4,6 +4,7 @@ import json
 import os
 import re
 import sys
+import time
 
 try:
     import requests
@@ -38,18 +39,30 @@ if os.path.exists(_TESSERACT_WINDOWS_CESTA):
     pytesseract.pytesseract.tesseract_cmd = _TESSERACT_WINDOWS_CESTA
 
 
+def stahni_odpoved(url, nazev, pokusy=3):
+    """Vrátí Response (HTTP 200), nebo None, když se stažení nepodaří ani po opakování.
+
+    Krátké výpadky sítě nebo pomalá odpověď serveru (typicky z GitHub Actions)
+    se tak nepromítnou do menu jako "nedostupné"."""
+    for pokus in range(1, pokusy + 1):
+        try:
+            response = requests.get(url, timeout=20)
+            if response.status_code == 200:
+                return response
+            print(f"  [{nazev}] HTTP {response.status_code} ({url}), pokus {pokus}/{pokusy}")
+            if "text" in response.headers.get("Content-Type", ""):
+                print(f"  {response.text[:300]}")
+        except requests.exceptions.RequestException as e:
+            print(f"  [{nazev}] Chyba sítě: {e} ({url}), pokus {pokus}/{pokusy}")
+        if pokus < pokusy:
+            time.sleep(2 * pokus)
+    return None
+
+
 def stahni(url, nazev):
     """Vrátí HTML string, nebo None při jakékoliv chybě sítě / HTTP."""
-    try:
-        response = requests.get(url, timeout=10)
-        if response.status_code != 200:
-            print(f"  [{nazev}] HTTP {response.status_code}. Prvních 500 znaků:")
-            print(f"  {response.text[:500]}")
-            return None
-        return response.text
-    except requests.exceptions.RequestException as e:
-        print(f"  [{nazev}] Chyba sítě: {e}")
-        return None
+    response = stahni_odpoved(url, nazev)
+    return response.text if response is not None else None
 
 
 def nedostupne(nazev, duvod="Menu není dostupné"):
@@ -296,13 +309,8 @@ def scrape_u_primu():
     if weekday > 4:
         return nedostupne(nazev)
 
-    try:
-        obrazek_response = requests.get(obrazek_url, timeout=10)
-        if obrazek_response.status_code != 200:
-            print(f"  [{nazev}] Obrázek menu HTTP {obrazek_response.status_code}.")
-            return obrazek_zaznam
-    except requests.exceptions.RequestException as e:
-        print(f"  [{nazev}] Chyba sítě při stahování obrázku: {e}")
+    obrazek_response = stahni_odpoved(obrazek_url, nazev)
+    if obrazek_response is None:
         return obrazek_zaznam
 
     try:
@@ -400,13 +408,8 @@ def scrape_u_nemilosrdnych_bratri():
 
     pdf_url = odkaz["href"]
 
-    try:
-        pdf_response = requests.get(pdf_url, timeout=10)
-        if pdf_response.status_code != 200:
-            print(f"  [{nazev}] PDF HTTP {pdf_response.status_code} ({pdf_url})")
-            return nedostupne(nazev)
-    except requests.exceptions.RequestException as e:
-        print(f"  [{nazev}] Chyba sítě při stahování PDF: {e}")
+    pdf_response = stahni_odpoved(pdf_url, nazev)
+    if pdf_response is None:
         return nedostupne(nazev)
 
     try:
@@ -417,6 +420,7 @@ def scrape_u_nemilosrdnych_bratri():
         return nedostupne(nazev)
 
     if not text.strip():
+        print(f"  [{nazev}] PDF neobsahuje žádný text ({pdf_url}).")
         return nedostupne(nazev)
 
     dnes = DNY_V_TYDNU[datetime.date.today().weekday()]
@@ -433,7 +437,8 @@ def scrape_u_nemilosrdnych_bratri():
             break
 
     if sekce is None:
-        print(f"  [{nazev}] Sekce pro den '{dnes}' v PDF nenalezena.")
+        print(f"  [{nazev}] Sekce pro den '{dnes}' v PDF nenalezena. Prvních 300 znaků:")
+        print(f"  {text[:300]}")
         return nedostupne(nazev)
 
     polozky = []
@@ -454,6 +459,7 @@ def scrape_u_nemilosrdnych_bratri():
             buffer = ""
 
     if not polozky:
+        print(f"  [{nazev}] Sekce pro den '{dnes}' neobsahuje žádné položky s cenou: {sekce!r}")
         return nedostupne(nazev)
 
     return {"restaurace": nazev, "dostupne": True, "polozky": polozky}
@@ -494,13 +500,8 @@ def scrape_fresh_menu():
         print(f"  {html[:500]}")
         return nedostupne(nazev)
 
-    try:
-        pdf_response = requests.get(pdf_url, timeout=10)
-        if pdf_response.status_code != 200:
-            print(f"  [{nazev}] PDF HTTP {pdf_response.status_code} ({pdf_url})")
-            return nedostupne(nazev)
-    except requests.exceptions.RequestException as e:
-        print(f"  [{nazev}] Chyba sítě při stahování PDF: {e}")
+    pdf_response = stahni_odpoved(pdf_url, nazev)
+    if pdf_response is None:
         return nedostupne(nazev)
 
     try:
@@ -511,6 +512,7 @@ def scrape_fresh_menu():
         return nedostupne(nazev)
 
     if not text.strip():
+        print(f"  [{nazev}] PDF neobsahuje žádný text ({pdf_url}).")
         return nedostupne(nazev)
 
     dnes = DNY_V_TYDNU[datetime.date.today().weekday()]
