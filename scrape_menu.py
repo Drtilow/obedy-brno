@@ -137,7 +137,7 @@ def scrape_pizzerie_viva():
 
 def scrape_sono():
     nazev = "SONO Grill & Bar"
-    html = stahni("https://www.sonogrillbar.cz/menu/", nazev)
+    html = stahni("https://www.sonogrillbar.cz/obedove-menu/", nazev)
     if html is None:
         return nedostupne(nazev)
 
@@ -148,24 +148,37 @@ def scrape_sono():
     soup = BeautifulSoup(html, "html.parser")
 
     # Stránka (Webnode CMS) strukturuje menu takto:
-    # - každý den týdne je nadpis <h1> (Pondělí–Pátek)
-    # - jídla jsou <p> elementy ve tvaru "Název  cena,-"
+    # - každý den týdne je nadpis <h2> (PONDĚLÍ–PÁTEK); pátek bývá omylem jen <p>
+    # - jídla jsou VELKÝMI PÍSMENY v <p>, cena na konci ve tvaru "195Kč"
+    # - jeden <p> může obsahovat víc jídel oddělených prázdnými řádky
+    # - sekce "TÝDENNÍ NABÍDKA" za dny už k dennímu menu nepatří
     DNY = {"pondělí": 0, "úterý": 1, "středa": 2, "čtvrtek": 3, "pátek": 4}
-    cena_re = re.compile(r"^(.+?)\s{2,}(\d{2,4}),-\s*$")
+    polozka_re = re.compile(r"(.+?)\s*\b(\d{2,4})\s*Kč")
 
     polozky = []
     aktualni_den = None
+    zavreno = False
 
-    for el in soup.find_all(["h1", "p"]):
-        text = el.get_text(separator=" ", strip=True)
-        if el.name == "h1":
-            aktualni_den = DNY.get(text.lower())
-        elif el.name == "p" and aktualni_den == dnesni_den:
-            m = cena_re.match(text)
-            if m:
-                polozky.append({"nazev": m.group(1).strip(), "cena": f"{m.group(2)} Kč"})
+    for el in soup.find_all(["h2", "p"]):
+        text = re.sub(r"\s+", " ", el.get_text(separator=" ")).strip()
+        if not text:
+            continue
+        if el.name == "h2" and text.lower().startswith("týdenní"):
+            break
+        if text.lower() in DNY:
+            aktualni_den = DNY[text.lower()]
+            continue
+        if aktualni_den != dnesni_den:
+            continue
+        if "uzavřen" in text.lower():
+            zavreno = True
+            continue
+        for m in polozka_re.finditer(text):
+            polozky.append({"nazev": m.group(1).strip().capitalize(), "cena": f"{m.group(2)} Kč"})
 
     if not polozky:
+        if zavreno:
+            return nedostupne(nazev, "Kuchyně je dnes zavřená (soukromá akce)")
         print(f"  [{nazev}] Žádné položky pro dnešní den nenalezeny.")
         return nedostupne(nazev)
 
@@ -211,6 +224,30 @@ def _primu_radky_s_pozici(obrazek_ocr):
     ]
     radky.sort(key=lambda r: r["top"])
     return radky
+
+
+def _primu_ceny_vpravo(obrazek):
+    """Druhý OCR průchod jen přes pravý sloupec s cenami.
+
+    Ceny jsou tučně, kurzívou a daleko vpravo — OCR celé stránky je občas vůbec
+    nezachytí (a pak by nešlo spárovat ceny s jídly). Samostatný výřez sloupce je
+    přečte spolehlivě. Vrací řádky ve stejném tvaru a souřadnicích (2× zvětšený
+    obrázek) jako _primu_radky_s_pozici, takže se dají prostě přidat k ostatním.
+    """
+    sedy = obrazek.convert("L")
+    vyrez = sedy.crop((int(sedy.width * 0.88), 0, sedy.width, sedy.height))
+    vyrez = vyrez.resize((vyrez.width * 3, vyrez.height * 3), Image.LANCZOS)
+    data = pytesseract.image_to_data(
+        vyrez, lang="ces", config="--psm 6", output_type=pytesseract.Output.DICT
+    )
+    ceny = []
+    for i in range(len(data["text"])):
+        m = re.match(r"^(\d{2,4})\W*$", data["text"][i].strip())
+        if m:
+            # výřez je 3× zvětšený, ostatní řádky jsou ve 2× zvětšeném obrázku
+            top = data["top"][i] * 2 // 3
+            ceny.append({"text": m.group(1), "top": top, "bottom": top + data["height"][i] * 2 // 3})
+    return ceny
 
 
 def _primu_spar_cenu(text, top, bottom, ceny_radky):
@@ -278,6 +315,8 @@ def scrape_u_primu():
             .filter(ImageFilter.SHARPEN)
         )
         radky = _primu_radky_s_pozici(obrazek_ocr)
+        radky += _primu_ceny_vpravo(obrazek)
+        radky.sort(key=lambda r: r["top"])
     except Exception as e:
         print(f"  [{nazev}] OCR se nepodařilo spustit / přečíst: {e}")
         return obrazek_zaznam
@@ -337,7 +376,7 @@ DNY_V_TYDNU = {
     6: "Neděle",
 }
 DEN_REGEX = re.compile(r"^(Pondělí|Úterý|Středa|Čtvrtek|Pátek|Sobota|Neděle):")
-POLEVKA_REGEX = re.compile(r"^0,[23]l\b", re.IGNORECASE)
+POLEVKA_REGEX = re.compile(r"^0,[23]\s*l\b", re.IGNORECASE)
 CENA_REGEX = re.compile(r"(\d+,-)\s*$")
 
 

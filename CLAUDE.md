@@ -57,7 +57,7 @@ scrape_menu.py → menu.json → index.html (frontend)
 | Korzar, VIVA, U Dřeváka, Plzeňský dvůr | HTML parsování (BeautifulSoup) |
 | U Primů | OCR z obrázku (pytesseract + Pillow) |
 | U Nemilosrdných Bratří, Fresh Menu (Šumavská/Veveří) | PDF čtení (pdfplumber) |
-| SONO Grill & Bar | HTML parsování (aktuálně nedostupné) |
+| SONO Grill & Bar | HTML parsování (stránka `/obedove-menu/`) |
 
 Při selhání scraper vrátí `{"dostupne": false, "duvod": "..."}` — chybová karta se zobrazí v UI.
 
