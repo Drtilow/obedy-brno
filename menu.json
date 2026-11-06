@@ -71,8 +71,25 @@
   },
   {
     "restaurace": "SONO Grill & Bar",
-    "dostupne": false,
-    "duvod": "Menu není dostupné"
+    "dostupne": true,
+    "polozky": [
+      {
+        "nazev": "Gulášová polévka, brambory, majoránka",
+        "cena": "55 Kč"
+      },
+      {
+        "nazev": "Vepřová sekaná pečeně, máslová bramborová kaše, nakládaný okurek",
+        "cena": "175 Kč"
+      },
+      {
+        "nazev": "Fish nad chips, mačkaný hrášek, tatarská omáčka, citron",
+        "cena": "220 Kč"
+      },
+      {
+        "nazev": "Krutí prso, kari omáčka, jasmínová rýže, koriandr",
+        "cena": "205 Kč"
+      }
+    ]
   },
   {
     "restaurace": "Fresh Menu (Šumavská/Veveří)",
@@ -128,22 +145,34 @@
   },
   {
     "restaurace": "U Nemilosrdných Bratří",
-    "dostupne": true,
-    "polozky": [
-      {
-        "nazev": "0,2 l Gulášová polévka 150 g Wrap, stripsy, slaninová mayo, steakové hranolky",
-        "cena": "220,-"
-      },
-      {
-        "nazev": "200 g Kuřecí řízečky s bramborovým salátem",
-        "cena": "199,-"
-      }
-    ]
+    "dostupne": false,
+    "duvod": "Menu není dostupné"
   },
   {
     "restaurace": "U Primů",
-    "dostupne": false,
-    "duvod": "Dnešní menu se nepodařilo přečíst"
+    "dostupne": true,
+    "polozky": [
+      {
+        "nazev": "Hovězí vývar s rýží a hráškem (a.9.)",
+        "cena": "v ceně"
+      },
+      {
+        "nazev": "Smažené česnekové řízečky, bramborový salát s majonézou (a.1.3.7.10.)",
+        "cena": "154 Kč"
+      },
+      {
+        "nazev": "Kuřecí jehla ( anglická slanina, klobása, cibule, paprika), štouchané brambory (a.1.)",
+        "cena": "154 Kč"
+      },
+      {
+        "nazev": "Hovězí nudličky „Stroganow“, dušená rýže (a. 1.3.7)",
+        "cena": "159 Kč"
+      },
+      {
+        "nazev": "Grilovaná kuřecí prsíčka s broskví a sýrem, hranolky, tatarka (a.1.)",
+        "cena": "159 Kč"
+      }
+    ]
   },
   {
     "restaurace": "U Dřeváka Beer&Grill",
