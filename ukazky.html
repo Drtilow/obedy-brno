@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ukázky designu: Michelin vs. TripAdvisor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * , *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      background: #f1f5f9;
+      color: #0f172a;
+      padding: 30px 16px 80px;
+    }
+
+    .container {
+      max-width: 1260px;
+      margin: 0 auto;
+    }
+
+    .intro-header {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+
+    .intro-header h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #0f172a;
+      letter-spacing: -0.02em;
+    }
+
+    .intro-header p {
+      color: #64748b;
+      margin-top: 8px;
+      font-size: 1.05rem;
+    }
+
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 28px;
+      align-items: start;
+    }
+
+    .preview-column {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .concept-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 4px;
+    }
+
+    .concept-title h2 {
+      font-size: 1.15rem;
+      font-weight: 700;
+    }
+
+    .concept-tag {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 3px 8px;
+      border-radius: 9999px;
+    }
+
+    /* ========================================================
+       VARIANTA 1: MICHELIN GUIDE EDITORIAL
+       ======================================================== */
+    .theme-michelin {
+      background: #ffffff;
+      border: 1px solid #e5e5e5;
+      border-radius: 4px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      overflow: hidden;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .michelin-header {
+      padding: 24px 22px 16px;
+      border-bottom: 1px solid #f0f0f0;
+      position: relative;
+    }
+
+    .michelin-badge-top {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #bd2333;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .michelin-badge-top svg {
+      width: 14px;
+      height: 14px;
+      fill: #bd2333;
+    }
+
+    .michelin-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #1a1a1a;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+    }
+
+    .michelin-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      margin-top: 10px;
+      font-size: 0.8rem;
+      color: #717171;
+    }
+
+    .michelin-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .michelin-soup {
+      background: #fafafa;
+      border-bottom: 1px solid #eee;
+      padding: 12px 22px;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 0.88rem;
+    }
+
+    .michelin-soup-label {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      color: #bd2333;
+      font-weight: 600;
+      margin-right: 6px;
+    }
+
+    .michelin-soup-name {
+      color: #222;
+      font-weight: 500;
+      flex: 1;
+    }
+
+    .michelin-soup-price {
+      font-size: 0.8rem;
+      color: #717171;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .michelin-food-list {
+      padding: 8px 0;
+    }
+
+    .michelin-item {
+      padding: 14px 22px;
+      border-bottom: 1px solid #f6f6f6;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .michelin-item:last-child {
+      border-bottom: none;
+    }
+
+    .michelin-item-body {
+      flex: 1;
+    }
+
+    .michelin-item-num {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      color: #bd2333;
+      font-size: 0.95rem;
+      margin-right: 8px;
+    }
+
+    .michelin-item-title {
+      color: #1a1a1a;
+      font-size: 0.92rem;
+      line-height: 1.45;
+    }
+
+    .michelin-item-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #1a1a1a;
+      white-space: nowrap;
+    }
+
+    .michelin-gluten {
+      display: inline-block;
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border: 1px solid #bd2333;
+      color: #bd2333;
+      padding: 0 4px;
+      border-radius: 2px;
+      margin-right: 6px;
+      vertical-align: 1px;
+    }
+
+    /* ========================================================
+       VARIANTA 2: TRIPADVISOR PORTAL STYLE
+       ======================================================== */
+    .theme-tripadvisor {
+      background: #ffffff;
+      border: 1px solid #e0e0e0;
+      border-radius: 14px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+      overflow: hidden;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    .trip-header {
+      padding: 18px 20px;
+      border-bottom: 1px solid #f0f0f0;
+      background: #ffffff;
+    }
+
+    .trip-top-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .trip-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #000000;
+      letter-spacing: -0.01em;
+    }
+
+    .trip-badge-choice {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: #e8f9f2;
+      color: #004f32;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 9999px;
+    }
+
+    .trip-rating-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .trip-bubbles {
+      display: flex;
+      gap: 3px;
+    }
+
+    .trip-bubble {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #00aa6c;
+      display: inline-block;
+    }
+
+    .trip-score {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #000000;
+    }
+
+    .trip-reviews-count {
+      font-size: 0.8rem;
+      color: #545454;
+    }
+
+    .trip-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .trip-tag {
+      background: #f2f2f2;
+      color: #333333;
+      font-size: 0.76rem;
+      font-weight: 600;
+      padding: 3px 9px;
+      border-radius: 6px;
+    }
+
+    .trip-soup {
+      background: #e8f9f2;
+      border-bottom: 1px solid #c8f0e0;
+      padding: 11px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 0.88rem;
+    }
+
+    .trip-soup-badge {
+      background: #00aa6c;
+      color: #ffffff;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+
+    .trip-soup-title {
+      font-weight: 600;
+      color: #004f32;
+      flex: 1;
+    }
+
+    .trip-food-item {
+      padding: 13px 20px;
+      border-bottom: 1px solid #f2f2f2;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .trip-food-item:last-child {
+      border-bottom: none;
+    }
+
+    .trip-food-name {
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: #111;
+      line-height: 1.35;
+    }
+
+    .trip-food-price {
+      background: #f2f2f2;
+      color: #000;
+      font-weight: 700;
+      font-size: 0.88rem;
+      padding: 4px 10px;
+      border-radius: 6px;
+      white-space: nowrap;
+    }
+
+    /* ========================================================
+       VARIANTA 3: MICHELIN BIB GOURMAND (BISTRO EDITION)
+       ======================================================== */
+    .theme-bib {
+      background: #ffffff;
+      border: 1px solid #eae6df;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+      overflow: hidden;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    .bib-header {
+      padding: 20px 22px 14px;
+      background: #fbf9f5;
+      border-bottom: 1px solid #eae6df;
+    }
+
+    .bib-top-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.73rem;
+      font-weight: 700;
+      color: #a82020;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .bib-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #1c1917;
+      letter-spacing: -0.01em;
+    }
+
+    .bib-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      margin-top: 8px;
+      font-size: 0.78rem;
+      color: #78716c;
+    }
+
+    .bib-soup {
+      background: #fefce8;
+      border-bottom: 1px solid #fef08a;
+      padding: 10px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 0.87rem;
+    }
+
+    .bib-soup-badge {
+      background: #fde047;
+      color: #713f12;
+      font-weight: 700;
+      font-size: 0.7rem;
+      padding: 2px 7px;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+
+    .bib-soup-name {
+      color: #713f12;
+      font-weight: 500;
+      flex: 1;
+    }
+
+    .bib-food-item {
+      padding: 13px 22px;
+      border-bottom: 1px solid #f5f5f4;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .bib-food-item:last-child {
+      border-bottom: none;
+    }
+
+    .bib-item-num {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #f5f5f4;
+      color: #78716c;
+      font-size: 0.75rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .bib-food-name {
+      font-size: 0.91rem;
+      color: #292524;
+      line-height: 1.4;
+      flex: 1;
+    }
+
+    .bib-food-price {
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: #1c1917;
+      background: #f5f5f4;
+      padding: 3px 8px;
+      border-radius: 6px;
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="intro-header">
+      <h1>Výběr designového směru</h1>
+      <p>Vyber si jeden ze 3 stylů inspirovaných Michelin Guide a TripAdvisor</p>
+    </div>
+
+    <div class="comparison-grid">
+
+      <!-- ============================================== -->
+      <!-- SLOUPEC 1: MICHELIN GUIDE EDITORIAL           -->
+      <!-- ============================================== -->
+      <div class="preview-column">
+        <div class="concept-title">
+          <h2>1. Michelin Guide Editorial</h2>
+          <span class="concept-tag" style="background: #fde8e8; color: #bd2333;">Prestiž & Elegance</span>
+        </div>
+        
+        <article class="theme-michelin">
+          <div class="michelin-header">
+            <div class="michelin-badge-top">
+              <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              MICHELIN SELECTION · BRNO
+            </div>
+            <h3 class="michelin-title">Korzar</h3>
+            <div class="michelin-meta">
+              <span>🕐 11:00 – 14:00</span>
+              <span>📍 Bayerova 25, Brno</span>
+              <span>🏷️ 5 hlavních chodů</span>
+            </div>
+          </div>
+
+          <div class="michelin-soup">
+            <span class="michelin-soup-name">
+              <span class="michelin-soup-label">Polévka:</span>
+              Gulášová s bramborem a majoránkou
+            </span>
+            <span class="michelin-soup-price">v ceně</span>
+          </div>
+
+          <div class="michelin-food-list">
+            <div class="michelin-item">
+              <div class="michelin-item-body">
+                <span class="michelin-item-num">1.</span>
+                <span class="michelin-item-title">Telecí řízek smažený na sádle, Vídeňský salát</span>
+              </div>
+              <span class="michelin-item-price">259 Kč</span>
+            </div>
+            <div class="michelin-item">
+              <div class="michelin-item-body">
+                <span class="michelin-item-num">2.</span>
+                <span class="michelin-item-title">Qurrito, kuřecí maso, směs sýrů, guacamole, hranolky</span>
+              </div>
+              <span class="michelin-item-price">199 Kč</span>
+            </div>
+            <div class="michelin-item">
+              <div class="michelin-item-body">
+                <span class="michelin-item-num">3.</span>
+                <span class="michelin-gluten">Bez lepku</span>
+                <span class="michelin-item-title">Hovězí Flank steak (Irsko), slaninový dip</span>
+              </div>
+              <span class="michelin-item-price">259 Kč</span>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- ============================================== -->
+      <!-- SLOUPEC 2: TRIPADVISOR PORTAL                 -->
+      <!-- ============================================== -->
+      <div class="preview-column">
+        <div class="concept-title">
+          <h2>2. TripAdvisor Portal</h2>
+          <span class="concept-tag" style="background: #e8f9f2; color: #004f32;">Zelená & Portál</span>
+        </div>
+
+        <article class="theme-tripadvisor">
+          <div class="trip-header">
+            <div class="trip-top-row">
+              <h3 class="trip-title">Korzar</h3>
+              <span class="trip-badge-choice">⭐ Volba hostů</span>
+            </div>
+            <div class="trip-rating-row">
+              <div class="trip-bubbles">
+                <span class="trip-bubble"></span>
+                <span class="trip-bubble"></span>
+                <span class="trip-bubble"></span>
+                <span class="trip-bubble"></span>
+                <span class="trip-bubble"></span>
+              </div>
+              <span class="trip-score">4.8</span>
+              <span class="trip-reviews-count">(180+ hodnocení)</span>
+            </div>
+            <div class="trip-tags">
+              <span class="trip-tag">🕐 11:00 – 14:00</span>
+              <span class="trip-tag">📍 Bayerova 25</span>
+              <span class="trip-tag">$$ · Česká / Grill</span>
+            </div>
+          </div>
+
+          <div class="trip-soup">
+            <span class="trip-soup-badge">Polévka</span>
+            <span class="trip-soup-title">Gulášová s bramborem a majoránkou</span>
+            <span style="font-weight: 700; color: #004f32; font-size: 0.85rem;">v ceně</span>
+          </div>
+
+          <div class="trip-food-item">
+            <span class="trip-food-name">1. Telecí řízek smažený na sádle, Vídeňský salát</span>
+            <span class="trip-food-price">259 Kč</span>
+          </div>
+          <div class="trip-food-item">
+            <span class="trip-food-name">2. Qurrito, kuřecí maso, směs sýrů, guacamole, hranolky</span>
+            <span class="trip-food-price">199 Kč</span>
+          </div>
+          <div class="trip-food-item">
+            <span class="trip-food-name">3. <span style="background: #e8f9f2; color: #004f32; font-weight:700; font-size: 0.72rem; padding: 2px 6px; border-radius: 4px; margin-right: 4px;">BEZ LEPKU</span> Hovězí Flank steak, slaninový dip</span>
+            <span class="trip-food-price">259 Kč</span>
+          </div>
+        </article>
+      </div>
+
+      <!-- ============================================== -->
+      <!-- SLOUPEC 3: MICHELIN BIB GOURMAND (BISTRO)     -->
+      <!-- ============================================== -->
+      <div class="preview-column">
+        <div class="concept-title">
+          <h2>3. Michelin Bib Gourmand</h2>
+          <span class="concept-tag" style="background: #fef3c7; color: #92400e;">Skvělý poměr cena/výkon</span>
+        </div>
+
+        <article class="theme-bib">
+          <div class="bib-header">
+            <div class="bib-top-tag">
+              🍽️ Bib Gourmand · Výtečné polední menu
+            </div>
+            <h3 class="bib-title">Korzar</h3>
+            <div class="bib-meta">
+              <span>🕐 11:00 – 14:00</span>
+              <span>📍 Bayerova 25</span>
+              <span>• 5 jídel</span>
+            </div>
+          </div>
+
+          <div class="bib-soup">
+            <span class="bib-soup-badge">Polévka</span>
+            <span class="bib-soup-name">Gulášová s bramborem a majoránkou</span>
+            <span style="font-weight: 700; color: #854d0e; font-size: 0.82rem;">v ceně</span>
+          </div>
+
+          <div class="bib-food-item">
+            <span class="bib-item-num">1</span>
+            <span class="bib-food-name">Telecí řízek smažený na sádle, Vídeňský salát</span>
+            <span class="bib-food-price">259 Kč</span>
+          </div>
+          <div class="bib-food-item">
+            <span class="bib-item-num">2</span>
+            <span class="bib-food-name">Qurrito, kuřecí maso, směs sýrů, guacamole, hranolky</span>
+            <span class="bib-food-price">199 Kč</span>
+          </div>
+          <div class="bib-food-item">
+            <span class="bib-item-num">3</span>
+            <div class="bib-food-name">
+              <span style="background: #f5f3ff; color: #6d28d9; border: 1px solid #ddd6fe; font-size: 0.65rem; font-weight:700; padding: 1px 5px; border-radius: 4px; margin-right: 4px;">BEZ LEPKU</span>
+              Hovězí Flank steak, slaninový dip
+            </div>
+            <span class="bib-food-price">259 Kč</span>
+          </div>
+        </article>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>

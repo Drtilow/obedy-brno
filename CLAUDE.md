@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Účel projektu
 
-Web aplikace, která stahuje denní obědové menu z 8 brněnských restaurací a zobrazuje je v přehledné HTML stránce.
+Web aplikace, která stahuje denní obědové menu z 8 brněnských restaurací a zobrazuje je v přehledné HTML stránce s názvem **Menu v Brně**.
 
 ## Spuštění
 
@@ -47,7 +47,9 @@ scrape_menu.py → menu.json → index.html (frontend)
 
 - **`scrape_menu.py`** — Python scraper; každá restaurace má vlastní funkci `scrape_*()`. Výstup je uložen do `menu.json`.
 - **`menu.json`** — Pole objektů; každý objekt je jedna restaurace s poli `restaurace`, `dostupne`, `polozky` (název + cena).
-- **`index.html`** — Jednoduchá JS aplikace; načítá `menu.json` a renderuje karty restaurací.
+- **`index.html`** — Frontend aplikace; načítá `menu.json`, zajišťuje interaktivní filtry, vyhledávání a renderuje karty restaurací.
+- **`index.html.popart.bak`** — Záloha původního komiksového Pop Art designu (ignorováno gitem).
+- **`ukazky.html`** — Srovnávací přehled designových konceptů (Michelin vs. Gastro portál vs. Bib Gourmand).
 - **`.github/workflows/update-menu.yml`** — GitHub Actions; spouští scraper každý den v 5:00 UTC a pushne změněný `menu.json` do repozitáře.
 
 ### Scrapovací strategie
@@ -61,6 +63,38 @@ scrape_menu.py → menu.json → index.html (frontend)
 
 Při selhání scraper vrátí `{"dostupne": false, "duvod": "..."}` — chybová karta se zobrazí v UI.
 
-### Nasazení
+---
+
+## Frontend a Design (aktualizace listopad 2026)
+
+Frontend prošel kompletní rekonstrukcí z původního komiksového Pop Artu na moderní portálový gastro styl:
+
+1. **Brand & Název:**
+   - Název projektu a webu: **Menu v Brně**.
+   - Podtitul: *„Prohlížejte denní nabídky oblíbených brněnských restaurací URSáků“*.
+   - Gastronomická ikona v zeleném kruhu s badge `Dnes`.
+
+2. **Barevná paleta & Typografie:**
+   - Svěží portálová zeleň (`#00AA6C`), mintové podbarvení (`#E8F9F2`), tmavá lesní zeleň pro texty na světlém pozadí (`#004F32`).
+   - Pozadí stránky: čisté neutrální `#F2F4F8`, karty čistě bílé s jemnými linkami `#E0E0E0`.
+   - Font: moderní geometrický grotesk **Plus Jakarta Sans** v kombinaci s **Inter**.
+
+3. **Interaktivní funkce (UI/UX):**
+   - **Live Search (vyhledávání v reálném čase):** fulltextové filtrování v názvech restaurací i jídel se žlutým zvýrazňováním (`<mark>`).
+   - **Rychlé filtry (Pill buttons):**
+     - *Vše* (kompletní nabídka)
+     - *S polévkou v ceně*
+     - *Bez lepku* (detekce bezlepkových jídel)
+     - *Do 185 Kč* (cenový filtr)
+   - **Hover animace karet:** Při najetí myší se karta restaurace plynule zvětší (`scale(1.1)`), nadzvedne (`translateY(-8px)`), získá prostorový stín a díky `z-index: 50` vystoupí před okolní karty.
+
+4. **Karty restaurací:**
+   - Hlavička s hodnocením (zelené bubliny), štítky jako *Volba hostů*, odkaz na Google Mapy pro adresu podniku.
+   - Polévka oddělena do samostatného mintového banneru se štítkem `POLÉVKA`.
+   - Hlavní chody přehledně číslovány s fixně zarovnanými cenami napravo a štítkem `BEZ LEPKU`.
+
+---
+
+## Nasazení
 
 Stránka běží na GitHub Pages pod vlastní doménou (`CNAME` → `obedy.ondrejtrtik.cz`). GitHub Actions (`update-menu.yml`) každý den commitne a pushne přegenerovaný `menu.json` do `main` — samotné nasazení statického webu (index.html + menu.json) obstarává GitHub Pages automaticky z obsahu `main`.
