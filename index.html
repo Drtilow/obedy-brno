@@ -2,8 +2,16 @@
 <html lang="cs">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Menu v Brně">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#ffffff">
   <title>Menu v Brně · Polední nabídka restaurací</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -41,6 +49,7 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+      -webkit-tap-highlight-color: transparent;
     }
 
     body {
@@ -48,15 +57,18 @@
       background-color: var(--bg-page);
       color: var(--text-main);
       min-height: 100vh;
-      padding: 0 0 60px;
+      padding: 0 0 max(60px, calc(32px + env(safe-area-inset-bottom)));
       -webkit-font-smoothing: antialiased;
+      touch-action: manipulation;
     }
 
     /* --- Horní Navigační lišta --- */
     .top-nav {
-      background: #ffffff;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border-color);
-      padding: 14px 24px;
+      padding: max(12px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) 12px max(16px, env(safe-area-inset-left));
       position: sticky;
       top: 0;
       z-index: 100;
@@ -204,13 +216,14 @@
     .search-input {
       width: 100%;
       padding: 13px 44px 13px 46px;
-      font-size: 0.96rem;
+      font-size: 16px;
       font-family: inherit;
       border: 2px solid #d0d7de;
       border-radius: var(--radius-full);
       outline: none;
       transition: border-color 0.15s ease, box-shadow 0.15s ease;
       background: #ffffff;
+      -webkit-appearance: none;
     }
 
     .search-input:focus {
@@ -237,6 +250,23 @@
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
+    }
+
+    @media (max-width: 640px) {
+      .filter-pills {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        width: 100%;
+        padding-bottom: 4px;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+      .filter-pills::-webkit-scrollbar {
+        display: none;
+      }
+      .filter-pill {
+        flex-shrink: 0;
+      }
     }
 
     .filter-pill {
@@ -277,6 +307,8 @@
       font-size: 0.9rem;
       color: var(--text-muted);
       font-weight: 500;
+      flex-wrap: wrap;
+      gap: 8px;
     }
 
     /* --- Grid karet --- */
@@ -290,6 +322,7 @@
     @media (max-width: 480px) {
       .restaurant-grid {
         grid-template-columns: 1fr;
+        gap: 16px;
       }
     }
 
@@ -306,11 +339,13 @@
       transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease;
     }
 
-    .card:hover {
-      transform: translateY(-8px) scale(1.1);
-      box-shadow: 0 20px 45px -8px rgba(0, 0, 0, 0.18), 0 10px 20px -10px rgba(0, 0, 0, 0.1);
-      border-color: var(--ta-green);
-      z-index: 50;
+    @media (hover: hover) and (pointer: fine) {
+      .card:hover {
+        transform: translateY(-8px) scale(1.1);
+        box-shadow: 0 20px 45px -8px rgba(0, 0, 0, 0.18), 0 10px 20px -10px rgba(0, 0, 0, 0.1);
+        border-color: var(--ta-green);
+        z-index: 50;
+      }
     }
 
     /* Hlavička karty */
@@ -946,6 +981,12 @@
   }
 
   nacistMenu();
+
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js').catch(() => {});
+    });
+  }
 </script>
 <script data-goatcounter="https://drtilow.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>

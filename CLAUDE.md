@@ -93,6 +93,12 @@ Frontend prošel kompletní rekonstrukcí z původního komiksového Pop Artu na
    - Polévka oddělena do samostatného mintového banneru se štítkem `POLÉVKA`.
    - Hlavní chody přehledně číslovány s fixně zarovnanými cenami napravo a štítkem `BEZ LEPKU`.
 
+5. **iPhone / iOS App & PWA podpora:**
+   - **`manifest.json`** a **`sw.js`** (Service Worker s network-first strategií a offline zálohou).
+   - **Domovské ikony:** `apple-touch-icon.png` (180×180), `icon-192.png`, `icon-512.png`.
+   - **iOS Standalone mód:** `apple-mobile-web-app-capable="yes"`, podpora výřezu / Dynamic Island (`viewport-fit=cover` a `env(safe-area-inset-*)`).
+   - **Mobilní optimalizace:** velikost písma `16px` ve vyhledávání (zabraňuje nechtěnému auto-zoomu v iOS Safari), plynulý horizontální posun filtrů a oddělení hover efektu jen pro zařízení s myší (`@media (hover: hover)`).
+
 ---
 
 ## Nasazení
