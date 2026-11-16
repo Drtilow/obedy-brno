@@ -71,7 +71,19 @@
     "dostupne": true,
     "polozky": [
       {
-        "nazev": "175kč burrito s mletým hovězím masem, fazole, rýže, kukuřice, chiilli, hranolky (1)",
+        "nazev": "Gulášová polévka, brambory, majoránka (1,9)",
+        "cena": "55 Kč"
+      },
+      {
+        "nazev": "Gratinovaná kuřecí prsa se sýrem, omáčka ze sušených rajčat, kuskus, bazalka (1,7)",
+        "cena": "195 Kč"
+      },
+      {
+        "nazev": "Špenátové lasagne, mozzarella, míchaný salát se zeleninou, balsamico dressing (1,3,7,12)",
+        "cena": "175 Kč"
+      },
+      {
+        "nazev": "Burrito s mletým hovězím masem, fazole, rýže, kukuřice, chiilli, hranolky (1)",
         "cena": "215 Kč"
       }
     ],

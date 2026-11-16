@@ -154,44 +154,63 @@ def scrape_sono():
     if html is None:
         return nedostupne(nazev)
 
-    dnesni_den = datetime.date.today().weekday()  # 0 = Pondělí
+    dnesni_den = datetime.date.today().weekday()  # 0 = Pondělí, 4 = Pátek
     if dnesni_den > 4:
         return nedostupne(nazev)
 
     soup = BeautifulSoup(html, "html.parser")
+    for br in soup.find_all("br"):
+        br.replace_with("\n")
 
-    # Stránka (Webnode CMS) strukturuje menu takto:
-    # - každý den týdne je nadpis <h2> (PONDĚLÍ–PÁTEK); pátek bývá omylem jen <p>
-    # - jídla jsou VELKÝMI PÍSMENY v <p>, cena na konci ve tvaru "195Kč"
-    # - jeden <p> může obsahovat víc jídel oddělených prázdnými řádky
-    # - sekce "TÝDENNÍ NABÍDKA" za dny už k dennímu menu nepatří
-    DNY = {"pondělí": 0, "úterý": 1, "středa": 2, "čtvrtek": 3, "pátek": 4}
-    polozka_re = re.compile(r"(.+?)\s*\b(\d{2,4})\s*Kč")
+    # Hledáme nejhlubší kontejner obsahující menu dnů
+    deepest = soup.find(
+        lambda e: e.name == "div"
+        and "PONDĚLÍ" in e.get_text()
+        and "PÁTEK" in e.get_text()
+        and not any("PONDĚLÍ" in c.get_text() and "PÁTEK" in c.get_text() for c in e.find_all("div"))
+    )
+    if deepest:
+        full_text = deepest.get_text(separator="\n")
+    else:
+        full_text = soup.get_text(separator="\n")
+
+    full_text = full_text.replace("\xa0", " ")
+
+    dny_mapa = {0: "pondělí", 1: "úterý", 2: "středa", 3: "čtvrtek", 4: "pátek"}
+    hledany_den = dny_mapa[dnesni_den]
+
+    # Rozdělení na jednotlivé dny
+    pattern = r"(?i)\b(PONDĚLÍ|ÚTERÝ|STŘEDA|ČTVRTEK|PÁTEK|TÝDENNÍ\s*NABÍDKA)\b"
+    splits = list(re.finditer(pattern, full_text))
+
+    dnesni_text = None
+    for i, match in enumerate(splits):
+        token = match.group(1).lower().strip()
+        if "týdenní" in token:
+            break
+        if token == hledany_den:
+            start = match.end()
+            end = splits[i + 1].start() if i + 1 < len(splits) else len(full_text)
+            dnesni_text = full_text[start:end].strip()
+            break
+
+    if not dnesni_text:
+        print(f"  [{nazev}] Sekce pro den '{hledany_den}' nebyla nalezena.")
+        return nedostupne(nazev)
+
+    if "uzavřen" in dnesni_text.lower():
+        return nedostupne(nazev, "Kuchyně je dnes zavřená")
 
     polozky = []
-    aktualni_den = None
-    zavreno = False
-
-    for el in soup.find_all(["h2", "p"]):
-        text = re.sub(r"\s+", " ", el.get_text(separator=" ")).strip()
-        if not text:
-            continue
-        if el.name == "h2" and text.lower().startswith("týdenní"):
-            break
-        if text.lower() in DNY:
-            aktualni_den = DNY[text.lower()]
-            continue
-        if aktualni_den != dnesni_den:
-            continue
-        if "uzavřen" in text.lower():
-            zavreno = True
-            continue
-        for m in polozka_re.finditer(text):
-            polozky.append({"nazev": m.group(1).strip().capitalize(), "cena": f"{m.group(2)} Kč"})
+    # Každé jídlo má název a končí cenou např. "195 Kč" nebo "55Kč"
+    item_re = re.compile(r"(.+?)\s*(\d{2,4})\s*Kč", re.DOTALL)
+    for m in item_re.finditer(dnesni_text):
+        name = re.sub(r"\s+", " ", m.group(1)).strip(" -:,;.\n\t")
+        price = f"{m.group(2)} Kč"
+        if name:
+            polozky.append({"nazev": name.capitalize(), "cena": price})
 
     if not polozky:
-        if zavreno:
-            return nedostupne(nazev, "Kuchyně je dnes zavřená (soukromá akce)")
         print(f"  [{nazev}] Žádné položky pro dnešní den nenalezeny.")
         return nedostupne(nazev)
 

@@ -906,7 +906,7 @@
     }
 
     const polozky = restaurace.polozky || [];
-    const maPolevku = polozky.length > 0 && polozky[0].cena === 'v ceně';
+    const maPolevku = polozky.length > 0 && (polozky[0].cena === 'v ceně' || /polévk|krém|vývar/i.test(polozky[0].nazev));
     const polevka = maPolevku ? polozky[0] : null;
     const hlavniRaw = maPolevku ? polozky.slice(1) : polozky;
     const hlavni = hlavniRaw.map((p, i) => ({ ...p, cislo: i + 1 }));

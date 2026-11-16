@@ -136,3 +136,8 @@ Stránka běží na GitHub Pages pod vlastní doménou (`CNAME` → `obedy.ondre
 
 #### 5. Aktualizace Service Workeru (`sw.js`)
 - Verze cache byla zvýšena na `menu-v-brne-v2`, aby se ve všech klientských prohlížečích okamžitě načetla nová verze aplikace.
+
+#### 6. Oprava scraperu SONO Grill & Bar (`scrape_menu.py` + `index.html`)
+- **Příčina:** Webnode CMS na webu SONO vkládá názvy jídel a ceny do oddělených `<p>` a `<div>` značek (často navíc oddělených `<br>`). Původní regulární výraz hledal jídlo i cenu uvnitř jediného tagu, takže polévku a většinu hlavních chodů zahodil.
+- **Oprava:** Nový parser nejprve získá ucelený text bloku pro daný den a spolehlivě páruje jídla s cenami podle struktury zakončené `Kč`. Navíc spolehlivě detekuje stav, kdy má restaurace zavřenou kuchyni (např. úterý).
+- **Frontend (`index.html`):** Detekce polévky byla rozšířena tak, aby rozpoznávala i placené polévky (např. za 55 Kč u Sono) a vkládala je do horního mintového pruhu `POLÉVKA`.
