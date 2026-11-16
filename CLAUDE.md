@@ -178,3 +178,14 @@ Tato pravidla shrnují zkušenosti z provozu tohoto projektu a slouží jako ná
   - Do `menu.json` vždy ukládat atribut `datum` (YYYY-MM-DD).
   - Frontend musí mít detekci víkendu (`dnes.getDay() === 0 || 6`), aby o víkendu nezobrazoval páteční obědy jako dnešní.
   - Frontend musí hlídat stáří dat v pracovní dny a při zpoždění scraperu uživatele jasně varovat (oranžový banner), že vidí včerejší nabídku.
+
+---
+
+## Plány do budoucna (Backlog / Nápady na rozšíření)
+
+### 1. Interaktivní navigace a odkazy na restaurace (vhodné pro školení a doporučení)
+- **Motivace:** Při prezentaci webu účastníkům školení a novým kolegům jako doporučení, kam vyrazit na oběd v okolí kanceláře URS.
+- **Koncept k dopracování:**
+  1. **Navigace na jeden klik (Google Maps / Mapy.cz / Apple Maps):** U každé restaurace přidat viditelnou adresu s ikonou špendlíku 📍. Po kliknutí se otevře mapa s možností okamžité pěší navigace.
+  2. **Vzdálenost a čas chůze:** Možnost uvést orientační vzdálenost od kanceláře (např. *„4 min pěšky · 350 m“*).
+  3. **Přímý odkaz na web podniku:** Klikatelný odkaz na oficiální stránky restaurace (pro zobrazení stálého jídelního lístku, nápojů, fotek nebo rezervace).
