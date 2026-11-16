@@ -141,3 +141,36 @@ Stránka běží na GitHub Pages pod vlastní doménou (`CNAME` → `obedy.ondre
 - **Příčina:** Webnode CMS na webu SONO vkládá názvy jídel a ceny do oddělených `<p>` a `<div>` značek (často navíc oddělených `<br>`). Původní regulární výraz hledal jídlo i cenu uvnitř jediného tagu, takže polévku a většinu hlavních chodů zahodil.
 - **Oprava:** Nový parser nejprve získá ucelený text bloku pro daný den a spolehlivě páruje jídla s cenami podle struktury zakončené `Kč`. Navíc spolehlivě detekuje stav, kdy má restaurace zavřenou kuchyni (např. úterý).
 - **Frontend (`index.html`):** Detekce polévky byla rozšířena tak, aby rozpoznávala i placené polévky (např. za 55 Kč u Sono) a vkládala je do horního mintového pruhu `POLÉVKA`.
+
+---
+
+## Zásady pro spolehlivé scrapery a prevence chyb (Best Practices)
+
+Tato pravidla shrnují zkušenosti z provozu tohoto projektu a slouží jako návod pro psaní dalších scraperů i řešení výpadků:
+
+### 1. Zákaz striktních kontrol typu „Všechno, nebo nic“
+- **Chyba z minulosti:** Podmínky jako `if len(polozky) != 6: return nedostupne()` způsobily, že když restaurace uvařila místo 5 jídel jen 4 (nebo jedno vyprodala / byl svátek), scraper zahodil celou nabídku.
+- **Pravidlo:** Vždy zobrazit raději neúplnou nabídku (např. 3 jídla) než vůbec žádnou. Selhání `nedostupne()` vracet výhradně tehdy, když je pole položek zcela prázdné.
+
+### 2. Odolnost vůči lidskému faktoru a CMS editorům (Webnode, WordPress)
+- **Chyba z minulosti:** Hledání dvojice `[název + cena]` uvnitř jediného HTML odstavce `<p>`. Když personál stiskl Shift+Enter nebo uložil cenu do vlastního odstavce, scraper jídlo nenašel.
+- **Pravidlo:** 
+  1. Před parsováním nahradit `<br>` znakem nového řádku `\n`.
+  2. Získat ucelený text celého kontejneru dne přes `el.get_text(separator="\n")` a normalizovat nezlomitelné mezery (`\xa0` → `' '`).
+  3. Regulární výrazy psát maximálně benevolentně: používat `\s*` pro libovolné mezery (pozor na chyby typu `'0,2 l'` vs `'0,2l'`), `re.IGNORECASE` a `re.DOTALL`.
+
+### 3. OCR (čtení z obrázků) používat jen v krajní nouzi
+- **Riziko:** Tesseract OCR je citlivý na změnu fontu, kontrastu, pozadí či komprese JPG. Na Linuxu (GitHub Actions) navíc funguje odlišně než lokálně na Windows.
+- **Pravidlo:** Pokud podnik publikuje menu pouze jako grafický leták (sociální sítě, obrázek na webu), je stabilnější uložit a zobrazit v aplikaci přímo obrázek (`typ: "obrazek"`), než riskovat častá selhání OCR parseru.
+
+### 4. Pravidla pro plánovač GitHub Actions (Cron)
+- **Zpoždění:** Na GitHub Actions zdarma mají plánované úlohy v celou hodinu (`:00`, zejména `00:00` a `05:00` UTC) masivní zpoždění až 8 hodin.
+- **Pravidlo:** 
+  - Vždy plánovat na **náhodné liché minuty** (např. `23 6 * * 1-5` a `41 7 * * 1-5`).
+  - Omezit cron pouze na dny, kdy se vaří (`1-5` pro pondělí až pátek). Běh o víkendu zbytečně pálí minuty a přepisuje páteční data na nedostupná.
+
+### 5. Obranný frontend a časová razítka
+- **Pravidlo:** 
+  - Do `menu.json` vždy ukládat atribut `datum` (YYYY-MM-DD).
+  - Frontend musí mít detekci víkendu (`dnes.getDay() === 0 || 6`), aby o víkendu nezobrazoval páteční obědy jako dnešní.
+  - Frontend musí hlídat stáří dat v pracovní dny a při zpoždění scraperu uživatele jasně varovat (oranžový banner), že vidí včerejší nabídku.
