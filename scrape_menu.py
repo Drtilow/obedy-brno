@@ -622,39 +622,81 @@ def scrape_u_drevaka():
 
 def scrape_plzensky_dvur():
     nazev = "Plzeňský dvůr"
-    html = stahni("https://plzenskydvur.cz/", nazev)
+    # Podrobnější menu včetně polévek je na podstránce /tydenni-menu
+    html = stahni("https://plzenskydvur.cz/tydenni-menu", nazev)
     if html is None:
+        html = stahni("https://plzenskydvur.cz/", nazev)
+        if html is None:
+            return nedostupne(nazev)
+
+    dnesni_den = datetime.date.today().weekday()  # 0 = Pondělí, 4 = Pátek
+    if dnesni_den > 4:
         return nedostupne(nazev)
 
     soup = BeautifulSoup(html, "html.parser")
+    dny_mapa = {0: "pondělí", 1: "úterý", 2: "středa", 3: "čtvrtek", 4: "pátek"}
+    hledany_den = dny_mapa[dnesni_den]
 
-    jidla = []
-    for div in soup.find_all("div", class_=lambda c: c and "food-item" in c):
-        cat_el = div.find("div", class_="food-category")
-        title_el = div.find("div", class_="food-title")
-        if not cat_el or not title_el:
-            continue
-        oznaceni = cat_el.get_text(strip=True)
-        jidlo = re.sub(r"\s+", " ", title_el.get_text(strip=True))
-        if oznaceni and jidlo:
-            jidla.append((oznaceni, jidlo))
-
-    if not jidla:
-        print(f"  [{nazev}] Žádné položky menu nenalezeny. Prvních 500 znaků:")
-        print(f"  {html[:500]}")
-        return nedostupne(nazev)
-
-    ceny = {}
-    for div in soup.find_all("div", class_="price-item"):
-        cat_el = div.find("div", class_="category-title")
-        price_el = div.find("div", class_="category-price")
-        if cat_el and price_el:
-            ceny[cat_el.get_text(strip=True)] = price_el.get_text(strip=True)
+    # Zkusíme najít sekci dne v /tydenni-menu
+    day_divs = soup.find_all("div", class_=lambda c: c and "day-menu" in c)
+    dnesni_div = None
+    for dd in day_divs:
+        h3 = dd.find("h3")
+        if h3 and hledany_den in h3.get_text().lower():
+            dnesni_div = dd
+            break
 
     polozky = []
-    for oznaceni, jidlo in jidla:
-        cena = ceny.get(oznaceni, "v ceně")
-        polozky.append({"nazev": jidlo, "cena": cena})
+    if dnesni_div:
+        has_soup = False
+        for fi in dnesni_div.find_all("div", class_=lambda c: c and "food-item" in c):
+            cat = fi.find("div", class_="food-category")
+            cat_txt = cat.get_text(strip=True) if cat else ""
+            title = fi.find("div", class_="food-title")
+            title_txt = re.sub(r"\s+", " ", title.get_text(strip=True)) if title else ""
+            price = fi.find("div", class_="food-price")
+            price_txt = price.get_text(strip=True) if price else ""
+
+            if not title_txt:
+                continue
+
+            if "polévk" in cat_txt.lower() or "polévk" in title_txt.lower():
+                has_soup = True
+                nazev_polevky = title_txt
+                if not re.search(r"polévk|krém|vývar", nazev_polevky, re.I):
+                    nazev_polevky = f"Polévka: {nazev_polevky}"
+                polozky.append({"nazev": nazev_polevky, "cena": price_txt or "v ceně"})
+            else:
+                polozky.append({"nazev": title_txt, "cena": price_txt or "v ceně"})
+
+        # Pokud personál v CMS nevyplnil polévku (např. v pondělí), doplníme polévku dle denní nabídky v ceně
+        if not has_soup:
+            polozky.insert(0, {"nazev": "Polévka dle denní nabídky", "cena": "v ceně"})
+    else:
+        # Fallback na původní parsování z homepage
+        jidla = []
+        for div in soup.find_all("div", class_=lambda c: c and "food-item" in c):
+            cat_el = div.find("div", class_="food-category")
+            title_el = div.find("div", class_="food-title")
+            if not cat_el or not title_el:
+                continue
+            oznaceni = cat_el.get_text(strip=True)
+            jidlo = re.sub(r"\s+", " ", title_el.get_text(strip=True))
+            if oznaceni and jidlo:
+                jidla.append((oznaceni, jidlo))
+
+        ceny = {}
+        for div in soup.find_all("div", class_="price-item"):
+            cat_el = div.find("div", class_="category-title")
+            price_el = div.find("div", class_="category-price")
+            if cat_el and price_el:
+                ceny[cat_el.get_text(strip=True)] = price_el.get_text(strip=True)
+
+        for oznaceni, jidlo in jidla:
+            cena = ceny.get(oznaceni, "v ceně")
+            polozky.append({"nazev": jidlo, "cena": cena})
+
+        polozky.insert(0, {"nazev": "Polévka dle denní nabídky", "cena": "v ceně"})
 
     if not polozky:
         return nedostupne(nazev)

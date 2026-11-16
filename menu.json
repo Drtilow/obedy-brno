@@ -125,6 +125,10 @@
     "dostupne": true,
     "polozky": [
       {
+        "nazev": "Polévka dle denní nabídky",
+        "cena": "v ceně"
+      },
+      {
         "nazev": "200g Pečený vepřový bůček na jablkách a slanině, bramborová kaše",
         "cena": "179 Kč"
       },

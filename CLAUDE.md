@@ -142,6 +142,10 @@ Stránka běží na GitHub Pages pod vlastní doménou (`CNAME` → `obedy.ondre
 - **Oprava:** Nový parser nejprve získá ucelený text bloku pro daný den a spolehlivě páruje jídla s cenami podle struktury zakončené `Kč`. Navíc spolehlivě detekuje stav, kdy má restaurace zavřenou kuchyni (např. úterý).
 - **Frontend (`index.html`):** Detekce polévky byla rozšířena tak, aby rozpoznávala i placené polévky (např. za 55 Kč u Sono) a vkládala je do horního mintového pruhu `POLÉVKA`.
 
+#### 7. Doplnění polévek pro Plzeňský dvůr (`scrape_menu.py`)
+- **Příčina:** Scraper původně stahoval pouze úvodní stránku `https://plzenskydvur.cz/`, kde restaurace polévky vůbec neuvádí (jsou tam jen jídla A, B, C). Konkrétní polévky pro jednotlivé dny (nebo údaj „Dle denní nabídky“) restaurace uvádí pouze na podstránce `https://plzenskydvur.cz/tydenni-menu`.
+- **Oprava:** Scraper nově primárně stahuje strukturované bloky `day-menu` z `/tydenni-menu`. Získá tak konkrétní polévku pro daný den (např. Česneková, Pórková, Zelná). Pokud personál v pondělí polévku do CMS nevyplní, scraper automaticky doplní standardní položku `Polévka dle denní nabídky` (v ceně menu).
+
 ---
 
 ## Zásady pro spolehlivé scrapery a prevence chyb (Best Practices)
