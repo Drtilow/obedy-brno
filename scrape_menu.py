@@ -659,8 +659,11 @@ scrapery = [
 ]
 vysledky = []
 
+dnes_iso = datetime.date.today().isoformat()
+
 for scraper in scrapery:
     vysledek = scraper()
+    vysledek["datum"] = dnes_iso
     vysledky.append(vysledek)
 
 with open("menu.json", "w", encoding="utf-8") as f:

@@ -311,6 +311,109 @@
       gap: 8px;
     }
 
+    /* --- Víkendová karta & Info bannery --- */
+    .stale-banner {
+      grid-column: 1 / -1;
+      border-radius: var(--radius-md);
+      padding: 14px 18px;
+      font-size: 0.92rem;
+      line-height: 1.5;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .stale-warning {
+      background: #fff8e6;
+      border: 1px solid #ffd580;
+      color: #8a5300;
+    }
+
+    .weekend-archive-notice {
+      background: #eef4ff;
+      border: 1px solid #c7d9fe;
+      color: #1e40af;
+    }
+
+    .btn-text-link {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      color: inherit;
+      font-weight: 600;
+      text-decoration: underline;
+      font-size: 0.9rem;
+      white-space: nowrap;
+      padding: 4px 8px;
+    }
+
+    .btn-text-link:hover {
+      opacity: 0.8;
+    }
+
+    .weekend-hero-card {
+      grid-column: 1 / -1;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 56px 24px;
+      text-align: center;
+      box-shadow: var(--shadow-card);
+      max-width: 640px;
+      margin: 10px auto 30px;
+    }
+
+    .weekend-icon {
+      font-size: 3.2rem;
+      margin-bottom: 16px;
+      line-height: 1;
+    }
+
+    .weekend-hero-card h2 {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+
+    .weekend-desc {
+      font-size: 1rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 24px;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .weekend-toggle-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #ffffff;
+      border: 1.5px solid var(--border-color);
+      color: var(--text-main);
+      padding: 12px 24px;
+      border-radius: var(--radius-full);
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+      font-family: inherit;
+    }
+
+    .weekend-toggle-btn:hover {
+      background: #f8fafc;
+      border-color: var(--ta-green);
+      color: var(--ta-green-dark);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-card);
+    }
+
     /* --- Grid karet --- */
     .restaurant-grid {
       display: grid;
@@ -899,26 +1002,97 @@
       </article>`;
   }
 
+  let JE_VIKEND = false;
+  let ZOBRAZIT_ARCHIV = false;
+  let DATA_DATUM = null;
+  let JSOU_DATA_STARA = false;
+
+  function formatujDatumCz(isoDatum) {
+    if (!isoDatum) return '';
+    const casti = isoDatum.split('-');
+    if (casti.length !== 3) return isoDatum;
+    return `${parseInt(casti[2], 10)}. ${parseInt(casti[1], 10)}. ${casti[0]}`;
+  }
+
+  function pripojListenerSkrytArchiv() {
+    const btnSkryt = document.getElementById('btn-skryt-archiv');
+    if (btnSkryt) {
+      btnSkryt.addEventListener('click', () => {
+        ZOBRAZIT_ARCHIV = false;
+        renderData(searchInput.value);
+      });
+    }
+  }
+
   function renderData(query = '') {
     const karty = document.getElementById('karty');
     const resultsCount = document.getElementById('results-count');
     const q = query.toLowerCase().trim();
 
+    // Pokud je víkend a uživatel si nevyžádal páteční archiv ani nevyhledává
+    if (JE_VIKEND && !ZOBRAZIT_ARCHIV && !q) {
+      resultsCount.textContent = 'Víkendový režim · Restaurace vaří ze stálého lístku';
+      karty.innerHTML = `
+        <div class="weekend-hero-card">
+          <div class="weekend-icon">☕🌿</div>
+          <h2>Přejeme pohodový víkend!</h2>
+          <p class="weekend-desc">
+            Brněnské restaurace o víkendu denní polední menu nenabízejí a vaří ze stálých lístků.<br>
+            Čerstvá polední nabídka na nový týden se načte automaticky v pondělí dopoledne.
+          </p>
+          <button type="button" class="weekend-toggle-btn" id="btn-zobrazit-archiv">
+            <span>👁️</span> Zobrazit páteční nabídku pro inspiraci
+          </button>
+        </div>
+      `;
+
+      const btnArchiv = document.getElementById('btn-zobrazit-archiv');
+      if (btnArchiv) {
+        btnArchiv.addEventListener('click', () => {
+          ZOBRAZIT_ARCHIV = true;
+          renderData(searchInput.value);
+        });
+      }
+      return;
+    }
+
     const vygenerovaneKarty = VSECHNA_DATA.map(r => vytvorKartu(r, q)).filter(html => html !== '');
 
+    let infoBannerHtml = '';
+    if (JE_VIKEND) {
+      infoBannerHtml = `
+        <div class="stale-banner weekend-archive-notice">
+          <div>
+            ℹ️ <strong>Inspirace z pátku:</strong> Zobrazujete polední nabídku z pátku. O víkendu restaurace polední meníčka nevaří.
+          </div>
+          <button type="button" class="btn-text-link" id="btn-skryt-archiv">Skrýt archiv</button>
+        </div>
+      `;
+    } else if (JSOU_DATA_STARA) {
+      infoBannerHtml = `
+        <div class="stale-banner stale-warning">
+          ⚠️ <strong>Upozornění:</strong> Zobrazena nabídka z ${formatujDatumCz(DATA_DATUM)}. Dnešní meníčka se zatím stahují nebo je podniky ještě nezveřejnily.
+        </div>
+      `;
+    }
+
     if (vygenerovaneKarty.length === 0) {
-      karty.innerHTML = `
+      karty.innerHTML = infoBannerHtml + `
         <div class="no-results">
           <h3>Nebyly nalezeny žádné nabídky</h3>
           <p>Pro zadaná kritéria a výraz „<strong>${query || AKTIVNI_FILTER}</strong>“ neodpovídá žádné jídlo.</p>
         </div>`;
       resultsCount.textContent = '0 nalezených restaurací';
+      pripojListenerSkrytArchiv();
       return;
     }
 
-    karty.innerHTML = vygenerovaneKarty.join('');
+    karty.innerHTML = infoBannerHtml + vygenerovaneKarty.join('');
+    pripojListenerSkrytArchiv();
 
-    if (q || AKTIVNI_FILTER !== 'all') {
+    if (JE_VIKEND) {
+      resultsCount.textContent = `Páteční archiv · ${vygenerovaneKarty.length} restaurací`;
+    } else if (q || AKTIVNI_FILTER !== 'all') {
       resultsCount.textContent = `Zobrazeno ${vygenerovaneKarty.length} z ${VSECHNA_DATA.length} restaurací`;
     } else {
       resultsCount.textContent = `Zobrazeno všech ${VSECHNA_DATA.length} restaurací v Brně`;
@@ -959,8 +1133,11 @@
     const openCount = document.getElementById('open-count');
 
     const dnes = new Date();
-    const denNazev = DNY[dnes.getDay()];
-    heroDenNadpis.textContent = `Menu v Brně · ${denNazev}`;
+    const denIndex = dnes.getDay(); // 0 = neděle, 6 = sobota
+    JE_VIKEND = (denIndex === 0 || denIndex === 6);
+    const denNazev = DNY[denIndex];
+
+    heroDenNadpis.textContent = JE_VIKEND ? `Menu v Brně · ${denNazev} (Víkend)` : `Menu v Brně · ${denNazev}`;
     datumText.textContent = `${denNazev}, ${dnesniDatum()}`;
 
     try {
@@ -971,8 +1148,20 @@
       VSECHNA_DATA = data;
       stav.remove();
 
+      // Kontrola stáří dat
+      const polozkaSDatem = data.find(d => d.datum);
+      DATA_DATUM = polozkaSDatem ? polozkaSDatem.datum : null;
+      const dnesniIso = `${dnes.getFullYear()}-${String(dnes.getMonth() + 1).padStart(2, '0')}-${String(dnes.getDate()).padStart(2, '0')}`;
+      JSOU_DATA_STARA = !JE_VIKEND && DATA_DATUM && (DATA_DATUM !== dnesniIso);
+
       const otevreno = data.filter(d => d.dostupne !== false).length;
-      openCount.textContent = `🟢 ${otevreno} z ${data.length} podniků má dnes menu`;
+      if (JE_VIKEND) {
+        openCount.textContent = '☕ O víkendu se denní menu nepodává';
+      } else if (JSOU_DATA_STARA) {
+        openCount.textContent = `⚠️ Nabídka z předchozího dne (${formatujDatumCz(DATA_DATUM)})`;
+      } else {
+        openCount.textContent = `🟢 ${otevreno} z ${data.length} podniků má dnes menu`;
+      }
 
       renderData('');
     } catch (e) {
