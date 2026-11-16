@@ -46,11 +46,11 @@ scrape_menu.py → menu.json → index.html (frontend)
 ### Klíčové soubory
 
 - **`scrape_menu.py`** — Python scraper; každá restaurace má vlastní funkci `scrape_*()`. Výstup je uložen do `menu.json`.
-- **`menu.json`** — Pole objektů; každý objekt je jedna restaurace s poli `restaurace`, `dostupne`, `polozky` (název + cena).
-- **`index.html`** — Frontend aplikace; načítá `menu.json`, zajišťuje interaktivní filtry, vyhledávání a renderuje karty restaurací.
+- **`menu.json`** — Pole objektů; každý objekt je jedna restaurace s poli `restaurace`, `dostupne`, `datum` (datum stažení YYYY-MM-DD), `polozky` (název + cena).
+- **`index.html`** — Frontend aplikace; načítá `menu.json`, zajišťuje interaktivní filtry, vyhledávání, víkendový režim, kontrolu stáří dat a renderuje karty restaurací.
 - **`index.html.popart.bak`** — Záloha původního komiksového Pop Art designu (ignorováno gitem).
 - **`ukazky.html`** — Srovnávací přehled designových konceptů (Michelin vs. Gastro portál vs. Bib Gourmand).
-- **`.github/workflows/update-menu.yml`** — GitHub Actions; spouští scraper každý den v 5:00 UTC a pushne změněný `menu.json` do repozitáře.
+- **`.github/workflows/update-menu.yml`** — GitHub Actions; spouští scraper v pracovní dny ráno (06:23 a 07:41 UTC) a pushne změněný `menu.json` do repozitáře.
 
 ### Scrapovací strategie
 
@@ -104,3 +104,35 @@ Frontend prošel kompletní rekonstrukcí z původního komiksového Pop Artu na
 ## Nasazení
 
 Stránka běží na GitHub Pages pod vlastní doménou (`CNAME` → `obedy.ondrejtrtik.cz`). GitHub Actions (`update-menu.yml`) každý den commitne a pushne přegenerovaný `menu.json` do `main` — samotné nasazení statického webu (index.html + menu.json) obstarává GitHub Pages automaticky z obsahu `main`.
+
+---
+
+## Historie změn a optimalizací (CHANGELOG)
+
+### 16. listopadu 2026 — Oprava zpoždění stahování, víkendový režim a kontrola stáří dat
+
+#### 1. Problém s ranním stahováním (GitHub Actions Delay)
+- **Příčina:** Původní plánovač v `.github/workflows/update-menu.yml` byl nastaven na `cron: '0 5 * * *'` (05:00 UTC v celou hodinu). V tento čas spouští úlohy tisíce repozitářů najednou, což na bezplatných GitHub Actions vedlo ke zpoždění ve frontě 7 až 8,5 hodiny (workflow reálně dobíhalo až mezi 13:00 a 14:40 SEČ, tedy po obědě).
+- **Důsledek o víkendu:** Poslední běh z neděle 15. 11. ve 13:37 uložil stav *"Menu není dostupné"* (protože o víkendu restaurace nevaří polední menu), a protože se pondělní ranní běh zpozdil, na webu v pondělí ráno visel stav *"nikde se nevaří"*.
+
+#### 2. Úprava plánovače GitHub Actions (`.github/workflows/update-menu.yml`)
+- **Liché minuty mimo špičku:** Čas byl posunut mimo celou hodinu a ranní špičku:
+  - **1. běh:** `23 6 * * 1-5` (06:23 UTC = **07:23 SEČ v zimě** / 08:23 SELČ v létě)
+  - **2. záložní běh:** `41 7 * * 1-5` (07:41 UTC = **08:41 SEČ v zimě** / 09:41 SELČ v létě)
+- **Omezení na pracovní dny (`1-5`):** Workflow se nespouští v sobotu a neděli, čímž se šetří GitHub Actions minuty a víkendové běhy nepřepisují páteční data.
+
+#### 3. Víkendový režim na frontendu (`index.html`)
+- **Proč vznikl:** Aby se o víkendu návštěvníkům nezobrazovala nabídka z pátku tvářící se jako víkendové obědy.
+- **Implementace:**
+  - V JavaScriptu se detekuje den v týdnu (`dnes.getDay() === 0 || 6`).
+  - V sobotu a v neděli web ve výchozím stavu zobrazí přehlednou víkendovou kartu:
+    * *„Přejeme pohodový víkend! Brněnské restaurace o víkendu polední menu nenabízejí a vaří ze stálých lístků.“*
+  - Tlačítko **„Zobrazit páteční nabídku pro inspiraci“** (nebo vyhledávání) umožňuje volitelně zobrazit nabídku z pátku s jasným modrým informačním pruhem upozorňujícím na archivní data.
+
+#### 4. Ukládání data do `menu.json` a detekce zastaralých dat
+- **`scrape_menu.py`:** Ke každé restauraci nově ukládá pole `"datum": "YYYY-MM-DD"`.
+- **`index.html`:** Pokud je pracovní den (pondělí–pátek), ale data v `menu.json` neodpovídají dnešnímu dni (např. při výpadku sítě nebo státním svátku), aplikace nahoře zobrazí viditelný oranžový varovný banner:
+  * *„⚠️ Upozornění: Zobrazena nabídka z [datum]. Dnešní meníčka se zatím stahují nebo je podniky ještě nezveřejnily.“*
+
+#### 5. Aktualizace Service Workeru (`sw.js`)
+- Verze cache byla zvýšena na `menu-v-brne-v2`, aby se ve všech klientských prohlížečích okamžitě načetla nová verze aplikace.
