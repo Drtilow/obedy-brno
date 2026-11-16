@@ -71,7 +71,7 @@ Frontend prošel kompletní rekonstrukcí z původního komiksového Pop Artu na
 
 1. **Brand & Název:**
    - Název projektu a webu: **Menu v Brně**.
-   - Podtitul: *„Prohlížejte denní nabídky oblíbených brněnských restaurací URSáků“*.
+   - Podtitul: *„Prohlížejte denní nabídku brněnských restaurací oblíbených mezi URSáky“*.
    - Gastronomická ikona v zeleném kruhu s badge `Dnes`.
 
 2. **Barevná paleta & Typografie:**
