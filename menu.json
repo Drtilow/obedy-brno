@@ -206,23 +206,23 @@
     "dostupne": true,
     "polozky": [
       {
-        "nazev": "Fazolová s uzeninou",
+        "nazev": "Gulášová s vepřovým masem a brambory",
         "cena": "v ceně"
       },
       {
-        "nazev": "Naše sekaná s anglickou slaninou, bramborovou kaší a kyselou okurkou",
+        "nazev": "Smažený sekaný karbanátek s majoránkou a česnekem, máslová bramborová kaše, nakládaná kyselá okurka, výhonky ředkvičky",
         "cena": "174"
       },
       {
-        "nazev": "Maďarský hovězí guláš, houskové knedlíky, červená cibulka",
+        "nazev": "Stroganoff s hovězími a vepřovými nudličkami, žampiony, kyselými okurkami a bramboráčky",
         "cena": "214"
       },
       {
-        "nazev": "Kuřecí Fajitas Wrap (marinovaná kuřecí prsíčka, gouda, nakládaná cibulka, grilovaná paprika, chimmichurri majonéza) hranolky, dip",
+        "nazev": "Caesar wrap s kuřecími prsíčky (Grilovaná kuřecí prsíčka, sýr Gran Moravia, ledový salát, Caesar dresink) hranolky a dresink",
         "cena": "184"
       },
       {
-        "nazev": "Gratinovaný kuřecí steak s rajčaty zapečený mozzarellou, grilovaná zelenina, opékané brambory, jogurtový dresink",
+        "nazev": "Medailonky z vepřové panenky se sázeným vejcem, bylinkovým dipem a opékané brambory",
         "cena": "184"
       }
     ],
