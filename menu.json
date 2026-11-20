@@ -71,20 +71,20 @@
     "dostupne": true,
     "polozky": [
       {
-        "nazev": "Žampionový krém, špecle, petržel (1,3,7)",
+        "nazev": "Mrkvový krém, zázvor, dýňová semínka (7)",
         "cena": "55 Kč"
       },
       {
-        "nazev": "Steak z vepřové kotlety, fazolky na kyselo, vejce, domácí bramboráčky (3,7)",
-        "cena": "205 Kč"
-      },
-      {
-        "nazev": "Grilované kuřecí prso, caesar salát, slanina, kruton (1,3,4,7,10)",
+        "nazev": "Trhaný losos, míchaný salát, vejce, červená řepa, koprový jogurt, bylinková bageta (1,3,4,7)",
         "cena": "220 Kč"
       },
       {
-        "nazev": "Smažený hermelín, máslové brambory, tatarská omáčka (1,3,7,10)",
-        "cena": "175 Kč"
+        "nazev": "Lasagne alla bolognese, bešamel(1,3,7,12)",
+        "cena": "210 Kč"
+      },
+      {
+        "nazev": "Smažený vepřový řízek, bramborový salát s majonézou, citron (1,3,7,9,10,12)",
+        "cena": "205 Kč"
       }
     ],
     "datum": "2026-11-20"
