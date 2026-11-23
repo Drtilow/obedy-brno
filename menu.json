@@ -198,23 +198,23 @@
     "dostupne": true,
     "polozky": [
       {
-        "nazev": "Drůbeží vývar s hráškem a nudlemi",
+        "nazev": "Hovězí vývar s nudlemi a zeleninou",
         "cena": "v ceně"
       },
       {
-        "nazev": "Smažený kuřecí Cordon bleu s bramborovou kaší a lehkým salátkem",
+        "nazev": "Lasagne Quattro Formaggi (Grilovaná kuřecí prsíčka, sýrová omáčka ze čtyř druhů sýru, bešamel) salátek",
         "cena": "174"
       },
       {
-        "nazev": "Chilli Con Carne s hovězím a vepřovým masem, fazolemi, kukuřicí, zakysanou smetanou a koriandrem, čerstvý chléb z pekařství Křižák",
-        "cena": "194"
+        "nazev": "Hovězí svíčková, redukce z brusinek, citron a houskový knedlík",
+        "cena": "214"
       },
       {
-        "nazev": "Tortilla plněná grilovanými kuřecími prsíčky, cheddarem, rajčátky, salátem a dipem, hranolky s dresinkem",
+        "nazev": "Chicken & Cheese Wrap (Grilované kuřecí prsíčka, cheddar, slanina, ledový salát, limetková mayo) hranolky a dresink",
         "cena": "184"
       },
       {
-        "nazev": "Grilované medailonky z vepřové panenky se zelenými fazolkami na slanině, opékané brambory s česnekem a dresink",
+        "nazev": "Grilovaná vepřová kotleta s krémovou žampionovou omáčkou a pečené slaninové brambory, salátek",
         "cena": "184"
       }
     ],
